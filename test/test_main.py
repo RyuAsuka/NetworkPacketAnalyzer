@@ -1,7 +1,4 @@
 from scapy.all import *
-from utils.FlowGenerator import FlowGenerator
-from Entities.BasicPacketInfo import BasicPacketInfo
-from utils.IdGenerator import IdGenerator
 from tqdm import tqdm
 
 
