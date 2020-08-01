@@ -29,8 +29,13 @@ if __name__ == '__main__':
             flow_generator.add_packet(basic_packet)
             n_valid += 1
         else:
-            n_discard -= 1
-    logger.info(f"End reading packets.\nTotal {all_packets} packets.\n{n_valid} is valid.\n{n_discard} is discarded.")
+            n_discard += 1
+    logger.info(
+        f"End reading packets.\n"
+        f"Total {total_num_packets} packets.\n"
+        f"{n_valid} is valid.\n"
+        f"{n_discard} is discarded."
+    )
     logger.info(f'Write into file: {output_file}')
     try:
         flow_generator.dumpflows_to_csv(output_file)

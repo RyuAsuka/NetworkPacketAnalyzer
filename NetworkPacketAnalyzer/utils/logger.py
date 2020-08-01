@@ -5,7 +5,7 @@ class MyLogger(object):
     def __init__(self, name, level=logging.INFO):
         self._logger = logging.getLogger(name)
         self._logger.setLevel(level)
-        self.add_stream_handler(level, log_format='[%(asctime)s - %(levelname)s] %(message)s @ %(name)')
+        self.add_stream_handler(level, log_format='[%(asctime)s - %(levelname)s] @ %(name)s %(message)s')
 
     def add_stream_handler(self, level, log_format):
         stream_handler = logging.StreamHandler()

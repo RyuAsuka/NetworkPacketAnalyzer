@@ -21,7 +21,7 @@ class BasicPacket(object):
         # IP information
         self.src_ip = ip_packet.src
         self.dst_ip = ip_packet.dst
-        self.protocol = ip_packet.protocol
+        self.protocol = ip_packet.proto
 
         self.src_port = 0
         self.dst_port = 0
@@ -72,7 +72,7 @@ class BasicPacket(object):
         str:
             该流对应的前向流 ID。
         """
-        return '-'.join([self.src_ip, self.src_port, self.dst_ip, self.dst_port, self.protocol])
+        return '-'.join([self.src_ip, str(self.src_port), self.dst_ip, str(self.dst_port), str(self.protocol)])
 
     def backward_flow_id(self):
         """
@@ -83,4 +83,4 @@ class BasicPacket(object):
         str:
             该流对应的后向流 ID。
         """
-        return '-'.join([self.dst_ip, self.dst_port, self.src_ip, self.src_port, self.protocol])
+        return '-'.join([self.dst_ip, str(self.dst_port), self.src_ip, str(self.src_port), str(self.protocol)])

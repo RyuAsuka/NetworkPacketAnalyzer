@@ -11,6 +11,7 @@ Flow
 from NetworkPacketAnalyzer.entities.BasicPacket import BasicPacket
 from NetworkPacketAnalyzer.utils.logger import MyLogger
 from NetworkPacketAnalyzer.analyzer.FlowStatistics import FlowStatistics
+from NetworkPacketAnalyzer.utils.FlowStatus import FlowStatus
 
 
 class Flow(object):
@@ -81,8 +82,6 @@ class Flow(object):
         self.start_time = 0
         self.end_time = 0
         self.flow_timeout = flow_timeout
-        self.flow_id = self._add_first_packet(first_packet)
-        self.src_ip, self.src_port, self.dst_ip, self.dst_port, self.protocol = self._parse_flow_id()
 
         # 统计量
         self.packet_length_stats = FlowStatistics()
@@ -99,6 +98,11 @@ class Flow(object):
         self.backward_packet_header_length_stats = FlowStatistics()
         self.backward_packet_payload_length_stats = FlowStatistics()
         self.backward_packet_interval_stats = FlowStatistics()
+
+        self.flow_status = FlowStatus.ACTIVE
+
+        self.flow_id = self._add_first_packet(first_packet)
+        self.src_ip, self.src_port, self.dst_ip, self.dst_port, self.protocol = self._parse_flow_id()
 
     def _parse_flow_id(self):
         """
@@ -334,26 +338,38 @@ class Flow(object):
 
     @property
     def packet_rate(self):
+        if self.flow_duration == 0:
+            return 1
         return (len(self._forward) + len(self._backward)) / self.flow_duration
 
     @property
     def forward_packet_rate(self):
+        if self.flow_duration == 0:
+            return 1
         return len(self._forward) / self.flow_duration
 
     @property
     def backward_packet_rate(self):
+        if self.flow_duration == 0:
+            return 1
         return len(self._backward) / self.flow_duration
 
     @property
     def bytes_rate(self):
+        if self.flow_duration == 0:
+            return self.total_packet_length
         return self.total_packet_length / self.flow_duration
 
     @property
     def forward_bytes_rate(self):
+        if self.flow_duration == 0:
+            return self.total_forward_packet_length
         return self.total_forward_packet_length / self.flow_duration
 
     @property
     def backward_bytes_rate(self):
+        if self.flow_duration == 0:
+            return self.total_forward_packet_length
         return self.total_backward_packet_length / self.flow_duration
 
     @property
@@ -407,7 +423,7 @@ class Flow(object):
         return self.packet_interval_stats.max()
 
     @property
-    def maean_packet_interval(self):
+    def mean_packet_interval(self):
         return self.packet_interval_stats.mean()
 
     @property
@@ -423,7 +439,7 @@ class Flow(object):
         return self.forward_packet_interval_stats.max()
 
     @property
-    def maean_forward_packet_interval(self):
+    def mean_forward_packet_interval(self):
         return self.forward_packet_interval_stats.mean()
 
     @property
@@ -439,7 +455,7 @@ class Flow(object):
         return self.backward_packet_interval_stats.max()
 
     @property
-    def maean_backward_packet_interval(self):
+    def mean_backward_packet_interval(self):
         return self.backward_packet_interval_stats.mean()
 
     @property

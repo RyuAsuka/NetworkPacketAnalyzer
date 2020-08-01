@@ -64,6 +64,8 @@ class FlowStatistics(object):
         int or float:
             当前统计表的和。
         """
+        if len(self._inner_data) == 0:
+            return 0
         npa = np.array(self._inner_data)
         return np.sum(npa)
 
@@ -76,6 +78,8 @@ class FlowStatistics(object):
         int or float:
              当前统计表中的最小值。
         """
+        if len(self._inner_data) == 0:
+            return 0
         npa = np.array(self._inner_data)
         return np.min(npa)
 
@@ -88,6 +92,8 @@ class FlowStatistics(object):
         int or float:
             当前统计表中的最大值。
         """
+        if len(self._inner_data) == 0:
+            return 0
         npa = np.array(self._inner_data)
         return np.max(npa)
 
@@ -100,6 +106,8 @@ class FlowStatistics(object):
         float:
             当前统计表中的均值。
         """
+        if len(self._inner_data) == 0:
+            return 0
         npa = np.array(self._inner_data)
         return np.mean(npa)
 
@@ -112,6 +120,8 @@ class FlowStatistics(object):
         float:
             当前统计表中的方差。
         """
+        if len(self._inner_data) == 0:
+            return 0
         npa = np.array(self._inner_data)
         return np.var(npa)
 
@@ -124,5 +134,7 @@ class FlowStatistics(object):
         float:
             当前统计表中的标准差。
         """
+        if len(self._inner_data) == 0:
+            return 0
         npa = np.array(self._inner_data)
         return np.std(npa)
