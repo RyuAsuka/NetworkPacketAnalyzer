@@ -9,10 +9,13 @@ When every packet belongs to this flow joined, the related statistics
 will be updated.
 """
 
+import time
 from NetworkPacketAnalyzer.entities.BasicPacket import BasicPacket
 from NetworkPacketAnalyzer.utils.logger import MyLogger
 from NetworkPacketAnalyzer.analyzer.FlowStatistics import FlowStatistics
 from NetworkPacketAnalyzer.utils.FlowStatus import FlowStatus
+
+TIME_FORMAT = "%Y-%m-%d %H:%M:%S"
 
 
 class Flow(object):
@@ -39,9 +42,9 @@ class Flow(object):
         The destination Port of the flow.
     protocol: int
         The protocol number of the flow. (TCP=6, UDP=17, Others=0)
-    start_time: int
+    _start_time: int
         The start time of the flow. (in microseconds)
-    end_time: int
+    _end_time: int
         The end time of the flow. (in microseconds)
     flow_timeout: int
         The timeout of the flow. (in microsecons)
@@ -82,12 +85,13 @@ class Flow(object):
     --------
     FlowStatus : The flow status enum.
     """
+
     def __init__(self, first_packet, flow_timeout):
         self.logger = MyLogger('Flow')
         self._forward = []
         self._backward = []
-        self.start_time = 0
-        self.end_time = 0
+        self._start_time = 0
+        self._end_time = 0
         self.flow_timeout = flow_timeout
 
         # Statistics
@@ -146,8 +150,8 @@ class Flow(object):
             The flow ID of the first packet.
         """
         self._forward.append(packet)
-        self.start_time = packet.timestamp
-        self.end_time = packet.timestamp
+        self._start_time = packet.timestamp
+        self._end_time = packet.timestamp
 
         self.packet_length_stats.add_value(packet.total_size)
         self.packet_header_length_stats.add_value(packet.header_size)
@@ -184,13 +188,68 @@ class Flow(object):
         self.packet_length_stats.add_value(packet.total_size)
         self.packet_header_length_stats.add_value(packet.header_size)
         self.packet_payload_length_stats.add_value(packet.payload_size)
-        self.end_time = packet.timestamp
-        interval = self.end_time - self.start_time
+        self._end_time = packet.timestamp
+        interval = self._end_time - self._start_time
         self.packet_interval_stats.add_value(interval)
         if packet.forward_flow_id() == self.flow_id:
             self.forward_packet_interval_stats.add_value(interval)
         elif packet.backward_flow_id() == self.flow_id:
             self.backward_packet_interval_stats.add_value(interval)
+
+    @staticmethod
+    def _get_formatted_time_string(microseconds, time_format):
+        """
+        Generate the formatted time string.
+
+        The time string is formatted by built-in `time` module.
+
+        Parameters
+        ----------
+        microseconds : int
+            The microseconds of needed time.
+        time_format : str
+            The time string format.
+
+        Returns
+        -------
+        str
+            The converted time string.
+
+        See Also
+        --------
+        time : The `time` module.
+        """
+        mic_sec = microseconds % 1000000
+        sec = microseconds / 1000000
+        time_str = time.strftime(time_format, time.gmtime(sec))
+        return time_str + str(mic_sec)
+
+    @property
+    def start_time(self):
+        """
+        Returns the formatted start time.
+
+        The formatted time could make the time readable.
+        The time format is passed through `time_format` string.
+
+        Returns
+        -------
+        str
+            The string format of start time.
+        """
+        return self._get_formatted_time_string(self._start_time, TIME_FORMAT)
+
+    @property
+    def end_time(self):
+        """
+        Returns the formatted end time.
+
+        Returns
+        -------
+        str
+            The string format of end time.
+        """
+        return self._get_formatted_time_string(self._end_time, TIME_FORMAT)
 
     @property
     def flow_duration(self):
@@ -202,7 +261,7 @@ class Flow(object):
         int
             The flow duration.
         """
-        return self.end_time - self.start_time
+        return self._end_time - self._start_time
 
     @property
     def total_packet_length(self):
@@ -744,10 +803,15 @@ class Flow(object):
             return self.total_forward_packet_length
         return self.total_backward_packet_length / (self.flow_duration / 1000000)
 
-    @property
-    def tcp_flags(self):
+    @staticmethod
+    def _stat_flags(packets_list):
         """
-        Returns the tcp flags count. (Only for TCP packets)
+        Statistic the flag count in all packets.
+
+        Parameters
+        ----------
+        packets_list : list of BasicPacket
+            The packet list.
 
         Returns
         -------
@@ -770,35 +834,49 @@ class Flow(object):
         urg_count = 0
         psh_count = 0
         fin_count = 0
-        for fp in self._forward:
-            fp: BasicPacket
-            if fp.hasURG:
+        for pkt in packets_list:
+            if pkt.hasURG:
                 urg_count += 1
-            if fp.hasSYN:
+            if pkt.hasSYN:
                 syn_count += 1
-            if fp.hasRST:
+            if pkt.hasRST:
                 rst_count += 1
-            if fp.hasACK:
+            if pkt.hasACK:
                 ack_count += 1
-            if fp.hasPSH:
+            if pkt.hasPSH:
                 psh_count += 1
-            if fp.hasFIN:
-                fin_count += 1
-        for bp in self._forward:
-            bp: BasicPacket
-            if bp.hasURG:
-                urg_count += 1
-            if bp.hasSYN:
-                syn_count += 1
-            if bp.hasRST:
-                rst_count += 1
-            if bp.hasACK:
-                ack_count += 1
-            if bp.hasPSH:
-                psh_count += 1
-            if bp.hasFIN:
+            if pkt.hasFIN:
                 fin_count += 1
         return syn_count, ack_count, rst_count, urg_count, psh_count, fin_count
+
+    @property
+    def tcp_flags(self):
+        """
+        Returns the tcp flags count. (Only for TCP packets)
+
+        Returns
+        -------
+        syn_count : int
+            The number of SYN flags.
+        ack_count : int
+            The number of ACK flags.
+        rst_count : int
+            The number of RST flags.
+        urg_count : int
+            The number of URG flags.
+        psh_count : int
+            The number of PSH flags.
+        fin_count : int
+            The number of FIN flags.
+        """
+        forward_flags = self._stat_flags(self._forward)
+        backward_flags = self._stat_flags(self._backward)
+        return forward_flags[0] + backward_flags[0], \
+            forward_flags[1] + backward_flags[1], \
+            forward_flags[2] + backward_flags[2], \
+            forward_flags[3] + backward_flags[3], \
+            forward_flags[4] + backward_flags[4], \
+            forward_flags[5] + backward_flags[5]
 
     @property
     def init_window_size(self):

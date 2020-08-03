@@ -68,7 +68,7 @@ class FlowGenerator(object):
         backward_packet_flow_id = packet.backward_flow_id()
         current_timestamp = packet.timestamp
         if forward_packet_flow_id not in self.current_flows and backward_packet_flow_id not in self.current_flows:
-            # 说明是一个新的流的开始
+            # A new flow begins
             self.current_flows[forward_packet_flow_id] = Flow(packet, self.flow_timeout)
         else:
             if forward_packet_flow_id in self.current_flows:
@@ -83,7 +83,7 @@ class FlowGenerator(object):
             # 4. When received a RST packet, finish current flow.
             # 5. When received a normal packet, add the packet to current flow.
             if flow.flow_status == FlowStatus.ACTIVE:
-                if current_timestamp - flow.start_time > self.flow_timeout:
+                if current_timestamp - flow._start_time > self.flow_timeout:
                     self._timeout_process(flow, packet)
                 elif packet.hasFIN:
                     flow.add_packet(packet)
@@ -107,28 +107,28 @@ class FlowGenerator(object):
                 flow.add_packet(packet)
                 if packet.hasFIN:
                     flow.flow_status = FlowStatus.TIME_WAIT
-                elif current_timestamp - flow.start_time > self.flow_timeout:
+                elif current_timestamp - flow._start_time > self.flow_timeout:
                     self._timeout_process(flow, packet)
             elif flow.flow_status == FlowStatus.CLOSING:
                 flow.add_packet(packet)
                 if packet.hasACK:
                     self._move_flow_from_current_to_finished(flow)
-                elif current_timestamp - flow.start_time > self.flow_timeout:
+                elif current_timestamp - flow._start_time > self.flow_timeout:
                     self._timeout_process(flow, packet)
             elif flow.flow_status == FlowStatus.CLOSE_WAIT:
                 flow.add_packet(packet)
                 if packet.backward_flow_id() == flow.flow_id and packet.hasFIN:
                     flow.flow_status = FlowStatus.LAST_ACK
-                elif current_timestamp - flow.start_time > self.flow_timeout:
+                elif current_timestamp - flow._start_time > self.flow_timeout:
                     self._timeout_process(flow, packet)
             elif flow.flow_status == FlowStatus.LAST_ACK:
                 flow.add_packet(packet)
                 if packet.hasACK:
                     self._move_flow_from_current_to_finished(flow)
-                elif current_timestamp - flow.start_time > self.flow_timeout:
+                elif current_timestamp - flow._start_time > self.flow_timeout:
                     self._timeout_process(flow, packet)
             elif flow.flow_status == FlowStatus.TIME_WAIT:
-                if current_timestamp - flow.start_time > self.flow_timeout:
+                if current_timestamp - flow._start_time > self.flow_timeout:
                     self._timeout_process(flow, packet)
 
     def _move_flow_from_current_to_finished(self, flow):
