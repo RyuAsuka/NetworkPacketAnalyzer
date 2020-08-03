@@ -1,0 +1,319 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, Asuka Mao
+# This file is distributed under the same license as the
+# NetworkPacketAnalyzer package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: NetworkPacketAnalyzer \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-08-03 17:33+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.8.0\n"
+
+#: ../../source/NetworkPacketAnalyzer.analyzer.rst:2
+msgid "NetworkPacketAnalyzer.analyzer package"
+msgstr ""
+
+#: ../../source/NetworkPacketAnalyzer.analyzer.rst:5
+msgid "Submodules"
+msgstr ""
+
+#: ../../source/NetworkPacketAnalyzer.analyzer.rst:8
+msgid "NetworkPacketAnalyzer.analyzer.FlowGenerator module"
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowGenerator:1 of
+msgid "Generate a flow supervisor."
+msgstr "生成一个流管理器。"
+
+#: NetworkPacketAnalyzer.analyzer.FlowGenerator:3 of
+msgid ""
+"The flow supervisor maintains two collection spaces, one represents the "
+"currently processing flows `current_flows`, the other is the flows "
+"finished processing `finished_flows`."
+msgstr ""
+"该流管理器维护两个存储空间，分别是当前正在处理的流 `current_flows` 和"
+"已经处理完成的流 `finished_flows`。"
+
+#: NetworkPacketAnalyzer.analyzer.FlowGenerator:6 of
+msgid ""
+"When a flow is marked as \"finished\", it will be moved from "
+"`current_flows` to `finished_flows`."
+msgstr ""
+"当一个流被标记为“已完成”时，它将会从 `current_flows` 中移动到 `finished_flows` 中。"
+
+#: NetworkPacketAnalyzer.analyzer.FlowGenerator:9 of
+msgid "Notes"
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowGenerator:10 of
+msgid "The condition of finishing a flow:"
+msgstr "流结束的条件："
+
+#: NetworkPacketAnalyzer.analyzer.FlowGenerator:12 of
+msgid "There is FIN packets in the flow. When the handshake of closing flow ends,"
+msgstr "流中包含 FIN 报文。当四次握手结束连接过程结束后，"
+
+#: NetworkPacketAnalyzer.analyzer.FlowGenerator:13 of
+msgid "the flow is considered as \"finished\". (Only for TCP)"
+msgstr "该流被认为终止。（仅对 TCP 有效）"
+
+#: NetworkPacketAnalyzer.analyzer.FlowGenerator:14 of
+msgid ""
+"There is a RST packet in the flow. When the processor meets the RST "
+"packet,"
+msgstr ""
+"流中存在 RST 报文。当处理器遇到 RST 报文时，"
+
+#: NetworkPacketAnalyzer.analyzer.FlowGenerator:15 of
+msgid "the flow is considered as \"finished\" immediately. (Only for TCP)"
+msgstr "流会被立刻终止。（仅对 TCP 有效）"
+
+#: NetworkPacketAnalyzer.analyzer.FlowGenerator:18 of
+msgid ""
+"Next packet of the same flow ID comes, but the arrival time exceeds the "
+"flow timeout,"
+msgstr ""
+"下一个包具有相同的流 ID，但它的到达时间超过了超时时间，"
+
+#: NetworkPacketAnalyzer.analyzer.FlowGenerator:17 of
+msgid ""
+"then the flow is considered as \"finished\", and the new packet is "
+"considered as a new flow. (For TCP and UDP)"
+msgstr ""
+"此时流被视为终止，该到达的新报文会被重新构造一个流。（对 TCP 和 UDP 有效。）"
+
+#: NetworkPacketAnalyzer.analyzer.FlowGenerator.FlowGenerator:1
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics:1 of
+msgid "Bases: :class:`object`"
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowGenerator.FlowGenerator:1 of
+msgid "The flow generator class."
+msgstr "流生成器类。"
+
+#: NetworkPacketAnalyzer.analyzer.FlowGenerator.FlowGenerator:3 of
+msgid ""
+"It maintains two collection spaces, one represents the currently "
+"processing flows `current_flows`, the other is the flows finished "
+"processing `finished_flows`."
+msgstr ""
+"该流管理器维护两个存储空间，分别是当前正在处理的流 `current_flows` 和"
+"已经处理完成的流 `finished_flows`。"
+
+#: NetworkPacketAnalyzer.analyzer.FlowGenerator.FlowGenerator:8 of
+msgid "The flows which are currently processing."
+msgstr "当前正在处理的流。"
+
+#: NetworkPacketAnalyzer.analyzer.FlowGenerator.FlowGenerator
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics of
+msgid "type"
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowGenerator.FlowGenerator:10 of
+msgid "dict of {str: Flow}"
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowGenerator.FlowGenerator:14 of
+msgid "The flows which are considered as finished."
+msgstr "被认为已经终止的流。"
+
+#: NetworkPacketAnalyzer.analyzer.FlowGenerator.FlowGenerator:16 of
+msgid "list of Flow"
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowGenerator.FlowGenerator:20
+#: NetworkPacketAnalyzer.analyzer.FlowGenerator.FlowGenerator:24 of
+msgid "The timeout of a flow."
+msgstr "流超时时间。"
+
+#: NetworkPacketAnalyzer.analyzer.FlowGenerator.FlowGenerator:22 of
+msgid "int"
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowGenerator.FlowGenerator
+#: NetworkPacketAnalyzer.analyzer.FlowGenerator.FlowGenerator.add_packet
+#: NetworkPacketAnalyzer.analyzer.FlowGenerator.FlowGenerator.dumpflows_to_csv
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics.add_value of
+msgid "Parameters"
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowGenerator.FlowGenerator.add_packet:1 of
+msgid "Add the packet to current flow."
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowGenerator.FlowGenerator.add_packet:3 of
+msgid "The processed `BasicPacket` object."
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowGenerator.FlowGenerator.dumpflows_to_csv:1
+#: of
+msgid ""
+"Dump the statistics of all flows in `finished_flow` and generate target "
+"CSV file."
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowGenerator.FlowGenerator.dumpflows_to_csv:3
+#: of
+msgid ""
+"If there are remaining flows in `current_flows`, move them to "
+"`finished_flows`."
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowGenerator.FlowGenerator.dumpflows_to_csv:5
+#: of
+msgid "The file name of output file."
+msgstr ""
+
+#: ../../source/NetworkPacketAnalyzer.analyzer.rst:16
+msgid "NetworkPacketAnalyzer.analyzer.FlowStatistics module"
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics:1 of
+msgid "The `FlowStatistics` class is defined based on `numpy`."
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics:3 of
+msgid "It encapsulates the statistics of a certain flow feature."
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics:6 of
+msgid "Supported statistics"
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics:8 of
+msgid "Count"
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics:10 of
+msgid "Summation"
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics:12 of
+msgid "Maximum"
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics:14 of
+msgid "Minimum"
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics:16 of
+msgid "Mean (Average)"
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics:18 of
+msgid "Standard Deviation"
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics:20 of
+msgid "Variance"
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics:1 of
+msgid "Encapsulate the statistics of a flow."
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics:5 of
+msgid "The inner array of statistics."
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics:7 of
+msgid "list of int or list of float"
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics.add_value:1 of
+msgid "Add value to the inner data list."
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics.add_value:3 of
+msgid "The value to be added."
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics.count:1 of
+msgid "Returns the count of current data table."
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics.count
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics.max
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics.mean
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics.min
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics.std
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics.sum
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics.variance of
+msgid "Returns"
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics.count:3 of
+msgid "The count value."
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics.count
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics.max
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics.mean
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics.min
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics.std
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics.sum
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics.variance of
+msgid "Return type"
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics.max:1 of
+msgid "Calculate the maximum of inner data table."
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics.max:3 of
+msgid "The maximum value in the table."
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics.mean:1 of
+msgid "Calculate the mean value of inner data table."
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics.mean:3 of
+msgid "The mean value of inner data table."
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics.min:1 of
+msgid "Calculate the minimum of inner data table."
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics.min:3 of
+msgid "The minimum value in the table."
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics.std:1 of
+msgid "Calculate the standard deviation value of inner data table."
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics.std:3 of
+msgid "The standard deviation value of inner data table."
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics.sum:1 of
+msgid "Calculate the sum of inner data table."
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics.sum:3 of
+msgid "The sum of data table."
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics.variance:1 of
+msgid "Calculate the variance value of inner data table."
+msgstr ""
+
+#: NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics.variance:3 of
+msgid "The variance value of inner data table."
+msgstr ""
+
+#: ../../source/NetworkPacketAnalyzer.analyzer.rst:25
+msgid "Module contents"
+msgstr ""
+

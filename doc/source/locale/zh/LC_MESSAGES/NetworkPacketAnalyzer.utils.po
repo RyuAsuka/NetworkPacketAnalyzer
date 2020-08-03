@@ -1,0 +1,352 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, Asuka Mao
+# This file is distributed under the same license as the
+# NetworkPacketAnalyzer package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: NetworkPacketAnalyzer \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-08-03 17:33+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.8.0\n"
+
+#: ../../source/NetworkPacketAnalyzer.utils.rst:2
+msgid "NetworkPacketAnalyzer.utils package"
+msgstr ""
+
+#: ../../source/NetworkPacketAnalyzer.utils.rst:5
+msgid "Submodules"
+msgstr ""
+
+#: ../../source/NetworkPacketAnalyzer.utils.rst:8
+msgid "NetworkPacketAnalyzer.utils.FlowStatus module"
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.FlowStatus:1 of
+msgid "This module defines a simple enum class `FlowStatus`."
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.FlowStatus.FlowStatus:1
+#: NetworkPacketAnalyzer.utils.logger.MyLogger:1 of
+msgid "Bases: :class:`object`"
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.FlowStatus.FlowStatus:1 of
+msgid "The FlowStatus enum."
+msgstr ""
+
+#: ../../source/NetworkPacketAnalyzer.utils.rst:16
+msgid "NetworkPacketAnalyzer.utils.logger module"
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger:1 of
+msgid "The logger class, which encapsulated built-in module `logging`."
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger:1 of
+msgid "The logger class."
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.add_file_handler
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.add_stream_handler
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.critical
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.debug
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.error
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.info
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.warning of
+msgid "Parameters"
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger:3 of
+msgid ""
+"The name of logger object. It is suggested to use the nanme of module or "
+"class which uses the logger."
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger:5 of
+msgid "The logging level. The default value is logging.INFO or 'INFO'."
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger:10 of
+msgid "The inner logger originated from `logging` module."
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger of
+msgid "type"
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger:12 of
+msgid "logging.RootLogger"
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger:15 of
+msgid "Examples"
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger:21 of
+msgid ":class:`logging`"
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger:22 of
+msgid "The origin `logging` module of Python."
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger:25 of
+msgid "Notes"
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger:26 of
+msgid "The common format of log format:"
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger:29 of
+msgid "Format"
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger:29 of
+msgid "Description"
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger:31 of
+#, python-format
+msgid "%(levelno)s"
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger:31 of
+msgid "Print level number."
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger:33 of
+#, python-format
+msgid "%(levelname)s"
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger:33 of
+msgid "Print level name."
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger:35 of
+#, python-format
+msgid "%(pathname)s"
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger:35 of
+msgid "Print the path of current programme."
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger:37 of
+#, python-format
+msgid "%(filename)s"
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger:37 of
+msgid "Print the name of current programme."
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger:39 of
+#, python-format
+msgid "%(funcName)s"
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger:39 of
+msgid "Print the name of current function."
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger:41 of
+#, python-format
+msgid "%(lineno)s"
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger:41 of
+msgid "Print the number of current line."
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger:43 of
+#, python-format
+msgid "%(asctime)s"
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger:43 of
+msgid "Print the time when logging."
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger:45 of
+#, python-format
+msgid "%(thread)d"
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger:45 of
+msgid "Print the thread ID."
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger:47 of
+#, python-format
+msgid "%(threadName)s"
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger:47 of
+msgid "Print the name of current thread."
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger:49 of
+#, python-format
+msgid "%(process)d"
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger:49 of
+msgid "Print the current process ID."
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger:51 of
+#, python-format
+msgid "%(message)s"
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger:51 of
+msgid "Print the log message."
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.add_file_handler:1 of
+msgid "Add a file handler to the logger."
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.add_file_handler:3 of
+msgid "The file handler enables the logger can put the logs into a file."
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.add_file_handler:5
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.add_stream_handler:3 of
+msgid "The log level of this handler."
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.add_file_handler:7
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.add_stream_handler:5 of
+msgid "The log format."
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.add_file_handler:9 of
+msgid "The output log filename."
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.add_stream_handler:1 of
+msgid "Add a stream handler to the logger."
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.critical:1 of
+msgid "Log 'message % args' with severity 'CRITICAL'."
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.critical:3
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.debug:3
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.error:3
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.info:3
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.warning:3 of
+msgid ""
+"To pass exception information, use the keyword argument exc_info with a "
+"true value, e.g."
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.critical:6
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.debug:6
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.error:6
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.info:6
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.warning:6 of
+#, python-format
+msgid "logger.debug(\"Houston, we have a %s\", \"thorny problem\", exc_info=1)"
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.critical:8 of
+msgid "The message of critical error information."
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.critical:10 of
+msgid "The variables used in the critical error information."
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.critical:11
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.debug:11
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.error:11
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.info:11
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.warning:11 of
+msgid "Other parameters."
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.critical
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.debug
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.error
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.info
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.warning of
+msgid "Other Parameters"
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.critical:13
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.debug:13
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.error:13
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.info:13
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.warning:13 of
+msgid ""
+"**exc_info** (*{0, 1}, default 0*) -- Whether to pass exception "
+"information."
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.debug:1 of
+msgid "Log 'message % args' with severity 'DEBUG'."
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.debug:8 of
+msgid "The message of debug information."
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.debug:10 of
+msgid "The variables used in the debug information."
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.error:1 of
+msgid "Log 'message % args' with severity 'ERROR'."
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.error:8 of
+msgid "The message of error information."
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.error:10 of
+msgid "The variables used in the error information."
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.info:1 of
+msgid "Log 'message % args' with severity 'INFO'."
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.info:8 of
+msgid "The message of normal information."
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.info:10 of
+msgid "The variables used in the normal information."
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.warning:1 of
+msgid "Log 'message % args' with severity 'WARNING'."
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.warning:8 of
+msgid "The message of warning information."
+msgstr ""
+
+#: NetworkPacketAnalyzer.utils.logger.MyLogger.warning:10 of
+msgid "The variables used in the warning information."
+msgstr ""
+
+#: ../../source/NetworkPacketAnalyzer.utils.rst:25
+msgid "Module contents"
+msgstr ""
+

@@ -1,0 +1,868 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>NetworkPacketAnalyzer.entities package &mdash; NetworkPacketAnalyzer 0.1 文档</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script src="_static/translations.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="next" title="NetworkPacketAnalyzer.utils package" href="NetworkPacketAnalyzer.utils.html" />
+    <link rel="prev" title="NetworkPacketAnalyzer.analyzer package" href="NetworkPacketAnalyzer.analyzer.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> NetworkPacketAnalyzer
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="NetworkPacketAnalyzer.html">NetworkPacketAnalyzer package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="NetworkPacketAnalyzer.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="NetworkPacketAnalyzer.analyzer.html">NetworkPacketAnalyzer.analyzer package</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">NetworkPacketAnalyzer.entities package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-NetworkPacketAnalyzer.entities.BasicPacket">NetworkPacketAnalyzer.entities.BasicPacket module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-NetworkPacketAnalyzer.entities.Flow">NetworkPacketAnalyzer.entities.Flow module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-NetworkPacketAnalyzer.entities">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="NetworkPacketAnalyzer.utils.html">NetworkPacketAnalyzer.utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="NetworkPacketAnalyzer.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NetworkPacketAnalyzer.html#module-NetworkPacketAnalyzer.Analyzer">NetworkPacketAnalyzer.Analyzer module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NetworkPacketAnalyzer.html#module-NetworkPacketAnalyzer">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">NetworkPacketAnalyzer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="NetworkPacketAnalyzer.html">NetworkPacketAnalyzer package</a> &raquo;</li>
+        
+      <li>NetworkPacketAnalyzer.entities package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/NetworkPacketAnalyzer.entities.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="networkpacketanalyzer-entities-package">
+<h1>NetworkPacketAnalyzer.entities package<a class="headerlink" href="#networkpacketanalyzer-entities-package" title="永久链接至标题">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="永久链接至标题">¶</a></h2>
+</div>
+<div class="section" id="module-NetworkPacketAnalyzer.entities.BasicPacket">
+<span id="networkpacketanalyzer-entities-basicpacket-module"></span><h2>NetworkPacketAnalyzer.entities.BasicPacket module<a class="headerlink" href="#module-NetworkPacketAnalyzer.entities.BasicPacket" title="永久链接至标题">¶</a></h2>
+<dl class="py class">
+<dt id="NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket">
+<em class="property">class </em><code class="sig-prename descclassname">NetworkPacketAnalyzer.entities.BasicPacket.</code><code class="sig-name descname">BasicPacket</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">packet_id</span></em>, <em class="sig-param"><span class="n">timestamp</span></em>, <em class="sig-param"><span class="n">ip_packet</span></em><span class="sig-paren">)</span><a class="headerlink" href="#NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>定义基础数据包类。</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>packet_id</strong> (<em>int</em>) – 数据包的全局 id</p></li>
+<li><p><strong>timestamp</strong> (<em>int</em>) – 数据包的到达时间（单位为微秒）</p></li>
+<li><p><strong>ip_packet</strong> (<em>IP</em>) – 数据包的网络层以上所有字段，含负载</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket.backward_flow_id">
+<code class="sig-name descname">backward_flow_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket.backward_flow_id" title="永久链接至目标">¶</a></dt>
+<dd><p>生成该流对应的后向流 ID。</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p>该流对应的后向流 ID。</p>
+</dd>
+<dt class="field-even">返回类型</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket.forward_flow_id">
+<code class="sig-name descname">forward_flow_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket.forward_flow_id" title="永久链接至目标">¶</a></dt>
+<dd><p>生成该流对应的前向流 ID。</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p>该流对应的前向流 ID。</p>
+</dd>
+<dt class="field-even">返回类型</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-NetworkPacketAnalyzer.entities.Flow">
+<span id="networkpacketanalyzer-entities-flow-module"></span><h2>NetworkPacketAnalyzer.entities.Flow module<a class="headerlink" href="#module-NetworkPacketAnalyzer.entities.Flow" title="永久链接至标题">¶</a></h2>
+<div class="section" id="flow">
+<h3>Flow<a class="headerlink" href="#flow" title="永久链接至标题">¶</a></h3>
+<p>定义流的实体。</p>
+<p>每一个流分为前后两个方向。当一个包到来时，会根据它的头部信息判断它属于前向包还是后向包。
+每一个属于该流的数据包被加入该流时，相应的统计量会进行更新。</p>
+<dl class="py class">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow">
+<em class="property">class </em><code class="sig-prename descclassname">NetworkPacketAnalyzer.entities.Flow.</code><code class="sig-name descname">Flow</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">first_packet</span></em>, <em class="sig-param"><span class="n">flow_timeout</span></em><span class="sig-paren">)</span><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>定义流。</p>
+<dl class="py attribute">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.logger">
+<code class="sig-name descname">logger</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.logger" title="永久链接至目标">¶</a></dt>
+<dd><p>用于记录日志。</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="NetworkPacketAnalyzer.utils.html#NetworkPacketAnalyzer.utils.logger.MyLogger" title="NetworkPacketAnalyzer.utils.logger.MyLogger">MyLogger</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow._forward">
+<code class="sig-name descname">_forward</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow._forward" title="永久链接至目标">¶</a></dt>
+<dd><p>用于存放前向数据包。</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list of BasicPacket</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow._backward">
+<code class="sig-name descname">_backward</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow._backward" title="永久链接至目标">¶</a></dt>
+<dd><p>用于存放后向数据包。</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list of BasicPacket</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.flow_id">
+<code class="sig-name descname">flow_id</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.flow_id" title="永久链接至目标">¶</a></dt>
+<dd><p>流 ID。格式：源 IP-源端口-目的IP-目的端口-协议号。</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.src_ip">
+<code class="sig-name descname">src_ip</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.src_ip" title="永久链接至目标">¶</a></dt>
+<dd><p>流的源IP</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.src_port">
+<code class="sig-name descname">src_port</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.src_port" title="永久链接至目标">¶</a></dt>
+<dd><p>流的源端口</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.dst_ip">
+<code class="sig-name descname">dst_ip</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.dst_ip" title="永久链接至目标">¶</a></dt>
+<dd><p>流的目的IP</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.dst_port">
+<code class="sig-name descname">dst_port</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.dst_port" title="永久链接至目标">¶</a></dt>
+<dd><p>流的目的端口</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.protocol">
+<code class="sig-name descname">protocol</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.protocol" title="永久链接至目标">¶</a></dt>
+<dd><p>流的协议号（TCP=6，UDP=17，其他=0）</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.start_time">
+<code class="sig-name descname">start_time</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.start_time" title="永久链接至目标">¶</a></dt>
+<dd><p>流的起始时间（微秒）</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.end_time">
+<code class="sig-name descname">end_time</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.end_time" title="永久链接至目标">¶</a></dt>
+<dd><p>流的结束时间（微秒）</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.flow_timeout">
+<code class="sig-name descname">flow_timeout</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.flow_timeout" title="永久链接至目标">¶</a></dt>
+<dd><p>流超时时间（微秒）</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.packet_length_stats">
+<code class="sig-name descname">packet_length_stats</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.packet_length_stats" title="永久链接至目标">¶</a></dt>
+<dd><p>统计流中所有包的总长度的统计量。</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="NetworkPacketAnalyzer.analyzer.html#NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics" title="NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics">FlowStatistics</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.packet_header_length_stats">
+<code class="sig-name descname">packet_header_length_stats</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.packet_header_length_stats" title="永久链接至目标">¶</a></dt>
+<dd><p>统计流中头部总长度的统计量。</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="NetworkPacketAnalyzer.analyzer.html#NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics" title="NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics">FlowStatistics</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.packet_payload_length_stats">
+<code class="sig-name descname">packet_payload_length_stats</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.packet_payload_length_stats" title="永久链接至目标">¶</a></dt>
+<dd><p>统计流中负载总长度的统计量。</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="NetworkPacketAnalyzer.analyzer.html#NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics" title="NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics">FlowStatistics</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.forward_packet_length_stats">
+<code class="sig-name descname">forward_packet_length_stats</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.forward_packet_length_stats" title="永久链接至目标">¶</a></dt>
+<dd><p>统计前向流中包的总长度的统计量。</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="NetworkPacketAnalyzer.analyzer.html#NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics" title="NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics">FlowStatistics</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.forward_packet_header_length_stats">
+<code class="sig-name descname">forward_packet_header_length_stats</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.forward_packet_header_length_stats" title="永久链接至目标">¶</a></dt>
+<dd><p>统计前向流中包的头部总长度的统计量。</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="NetworkPacketAnalyzer.analyzer.html#NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics" title="NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics">FlowStatistics</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.forward_packet_payload_length_stats">
+<code class="sig-name descname">forward_packet_payload_length_stats</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.forward_packet_payload_length_stats" title="永久链接至目标">¶</a></dt>
+<dd><p>统计前向流中包的负载总长度的统计量。</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="NetworkPacketAnalyzer.analyzer.html#NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics" title="NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics">FlowStatistics</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.forward_packet_interval_stats">
+<code class="sig-name descname">forward_packet_interval_stats</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.forward_packet_interval_stats" title="永久链接至目标">¶</a></dt>
+<dd><p>统计前向流中包的间隔时间的统计量。</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="NetworkPacketAnalyzer.analyzer.html#NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics" title="NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics">FlowStatistics</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.backward_packet_length_stats">
+<code class="sig-name descname">backward_packet_length_stats</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.backward_packet_length_stats" title="永久链接至目标">¶</a></dt>
+<dd><p>统计后向流中包的总长度的统计量。</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="NetworkPacketAnalyzer.analyzer.html#NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics" title="NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics">FlowStatistics</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.backward_packet_header_length_stats">
+<code class="sig-name descname">backward_packet_header_length_stats</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.backward_packet_header_length_stats" title="永久链接至目标">¶</a></dt>
+<dd><p>统计后向流中包的头部总长度的统计量。</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="NetworkPacketAnalyzer.analyzer.html#NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics" title="NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics">FlowStatistics</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.backward_packet_payload_length_stats">
+<code class="sig-name descname">backward_packet_payload_length_stats</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.backward_packet_payload_length_stats" title="永久链接至目标">¶</a></dt>
+<dd><p>统计后向流中包的负载总长度的统计量。</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="NetworkPacketAnalyzer.analyzer.html#NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics" title="NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics">FlowStatistics</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.backward_packet_interval_stats">
+<code class="sig-name descname">backward_packet_interval_stats</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.backward_packet_interval_stats" title="永久链接至目标">¶</a></dt>
+<dd><p>统计后向流中包的间隔时间的统计量。</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="NetworkPacketAnalyzer.analyzer.html#NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics" title="NetworkPacketAnalyzer.analyzer.FlowStatistics.FlowStatistics">FlowStatistics</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>first_packet</strong> (<a class="reference internal" href="#NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket" title="NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket"><em>BasicPacket</em></a>) – 该流的第一个包，用于构造流</p></li>
+<li><p><strong>flow_timeout</strong> (<em>int</em>) – 指定流超时时间</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.add_packet">
+<code class="sig-name descname">add_packet</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">packet</span></em><span class="sig-paren">)</span><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.add_packet" title="永久链接至目标">¶</a></dt>
+<dd><p>向流中添加包，并更新流信息</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>packet</strong> (<a class="reference internal" href="#NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket" title="NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket"><em>BasicPacket</em></a>) – 待添加的 IP 包。</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.backward_bytes_rate">
+<em class="property">property </em><code class="sig-name descname">backward_bytes_rate</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.backward_bytes_rate" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.backward_packet_count">
+<em class="property">property </em><code class="sig-name descname">backward_packet_count</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.backward_packet_count" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.backward_packet_rate">
+<em class="property">property </em><code class="sig-name descname">backward_packet_rate</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.backward_packet_rate" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.bytes_rate">
+<em class="property">property </em><code class="sig-name descname">bytes_rate</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.bytes_rate" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.flow_duration">
+<em class="property">property </em><code class="sig-name descname">flow_duration</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.flow_duration" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.forward_bytes_rate">
+<em class="property">property </em><code class="sig-name descname">forward_bytes_rate</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.forward_bytes_rate" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.forward_packet_count">
+<em class="property">property </em><code class="sig-name descname">forward_packet_count</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.forward_packet_count" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.forward_packet_rate">
+<em class="property">property </em><code class="sig-name descname">forward_packet_rate</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.forward_packet_rate" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.init_window_size">
+<em class="property">property </em><code class="sig-name descname">init_window_size</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.init_window_size" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.max_backward_packet_header_length">
+<em class="property">property </em><code class="sig-name descname">max_backward_packet_header_length</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.max_backward_packet_header_length" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.max_backward_packet_interval">
+<em class="property">property </em><code class="sig-name descname">max_backward_packet_interval</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.max_backward_packet_interval" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.max_backward_packet_length">
+<em class="property">property </em><code class="sig-name descname">max_backward_packet_length</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.max_backward_packet_length" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.max_backward_packet_payload_length">
+<em class="property">property </em><code class="sig-name descname">max_backward_packet_payload_length</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.max_backward_packet_payload_length" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.max_forward_packet_header_length">
+<em class="property">property </em><code class="sig-name descname">max_forward_packet_header_length</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.max_forward_packet_header_length" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.max_forward_packet_interval">
+<em class="property">property </em><code class="sig-name descname">max_forward_packet_interval</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.max_forward_packet_interval" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.max_forward_packet_length">
+<em class="property">property </em><code class="sig-name descname">max_forward_packet_length</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.max_forward_packet_length" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.max_forward_packet_payload_length">
+<em class="property">property </em><code class="sig-name descname">max_forward_packet_payload_length</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.max_forward_packet_payload_length" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.max_packet_interval">
+<em class="property">property </em><code class="sig-name descname">max_packet_interval</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.max_packet_interval" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.max_packet_length">
+<em class="property">property </em><code class="sig-name descname">max_packet_length</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.max_packet_length" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.mean_backward_packet_header_length">
+<em class="property">property </em><code class="sig-name descname">mean_backward_packet_header_length</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.mean_backward_packet_header_length" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.mean_backward_packet_interval">
+<em class="property">property </em><code class="sig-name descname">mean_backward_packet_interval</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.mean_backward_packet_interval" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.mean_backward_packet_length">
+<em class="property">property </em><code class="sig-name descname">mean_backward_packet_length</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.mean_backward_packet_length" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.mean_backward_packet_payload_length">
+<em class="property">property </em><code class="sig-name descname">mean_backward_packet_payload_length</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.mean_backward_packet_payload_length" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.mean_forward_packet_header_length">
+<em class="property">property </em><code class="sig-name descname">mean_forward_packet_header_length</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.mean_forward_packet_header_length" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.mean_forward_packet_interval">
+<em class="property">property </em><code class="sig-name descname">mean_forward_packet_interval</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.mean_forward_packet_interval" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.mean_forward_packet_length">
+<em class="property">property </em><code class="sig-name descname">mean_forward_packet_length</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.mean_forward_packet_length" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.mean_forward_packet_payload_length">
+<em class="property">property </em><code class="sig-name descname">mean_forward_packet_payload_length</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.mean_forward_packet_payload_length" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.mean_packet_interval">
+<em class="property">property </em><code class="sig-name descname">mean_packet_interval</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.mean_packet_interval" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.mean_packet_length">
+<em class="property">property </em><code class="sig-name descname">mean_packet_length</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.mean_packet_length" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.min_backward_packet_header_length">
+<em class="property">property </em><code class="sig-name descname">min_backward_packet_header_length</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.min_backward_packet_header_length" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.min_backward_packet_interval">
+<em class="property">property </em><code class="sig-name descname">min_backward_packet_interval</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.min_backward_packet_interval" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.min_backward_packet_length">
+<em class="property">property </em><code class="sig-name descname">min_backward_packet_length</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.min_backward_packet_length" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.min_backward_packet_payload_length">
+<em class="property">property </em><code class="sig-name descname">min_backward_packet_payload_length</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.min_backward_packet_payload_length" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.min_forward_packet_header_length">
+<em class="property">property </em><code class="sig-name descname">min_forward_packet_header_length</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.min_forward_packet_header_length" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.min_forward_packet_interval">
+<em class="property">property </em><code class="sig-name descname">min_forward_packet_interval</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.min_forward_packet_interval" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.min_forward_packet_length">
+<em class="property">property </em><code class="sig-name descname">min_forward_packet_length</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.min_forward_packet_length" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.min_forward_packet_payload_length">
+<em class="property">property </em><code class="sig-name descname">min_forward_packet_payload_length</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.min_forward_packet_payload_length" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.min_packet_interval">
+<em class="property">property </em><code class="sig-name descname">min_packet_interval</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.min_packet_interval" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.min_packet_length">
+<em class="property">property </em><code class="sig-name descname">min_packet_length</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.min_packet_length" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.packet_count">
+<em class="property">property </em><code class="sig-name descname">packet_count</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.packet_count" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.packet_rate">
+<em class="property">property </em><code class="sig-name descname">packet_rate</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.packet_rate" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.std_backward_packet_header_length">
+<em class="property">property </em><code class="sig-name descname">std_backward_packet_header_length</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.std_backward_packet_header_length" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.std_backward_packet_interval">
+<em class="property">property </em><code class="sig-name descname">std_backward_packet_interval</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.std_backward_packet_interval" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.std_backward_packet_length">
+<em class="property">property </em><code class="sig-name descname">std_backward_packet_length</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.std_backward_packet_length" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.std_backward_packet_payload_length">
+<em class="property">property </em><code class="sig-name descname">std_backward_packet_payload_length</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.std_backward_packet_payload_length" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.std_forward_packet_header_length">
+<em class="property">property </em><code class="sig-name descname">std_forward_packet_header_length</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.std_forward_packet_header_length" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.std_forward_packet_interval">
+<em class="property">property </em><code class="sig-name descname">std_forward_packet_interval</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.std_forward_packet_interval" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.std_forward_packet_length">
+<em class="property">property </em><code class="sig-name descname">std_forward_packet_length</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.std_forward_packet_length" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.std_forward_packet_payload_length">
+<em class="property">property </em><code class="sig-name descname">std_forward_packet_payload_length</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.std_forward_packet_payload_length" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.std_packet_interval">
+<em class="property">property </em><code class="sig-name descname">std_packet_interval</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.std_packet_interval" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.std_packet_length">
+<em class="property">property </em><code class="sig-name descname">std_packet_length</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.std_packet_length" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.tcp_flags">
+<em class="property">property </em><code class="sig-name descname">tcp_flags</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.tcp_flags" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.total_backward_packet_header_length">
+<em class="property">property </em><code class="sig-name descname">total_backward_packet_header_length</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.total_backward_packet_header_length" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.total_backward_packet_length">
+<em class="property">property </em><code class="sig-name descname">total_backward_packet_length</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.total_backward_packet_length" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.total_backward_packet_payload_length">
+<em class="property">property </em><code class="sig-name descname">total_backward_packet_payload_length</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.total_backward_packet_payload_length" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.total_forward_packet_header_length">
+<em class="property">property </em><code class="sig-name descname">total_forward_packet_header_length</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.total_forward_packet_header_length" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.total_forward_packet_length">
+<em class="property">property </em><code class="sig-name descname">total_forward_packet_length</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.total_forward_packet_length" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.total_forward_packet_payload_length">
+<em class="property">property </em><code class="sig-name descname">total_forward_packet_payload_length</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.total_forward_packet_payload_length" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="NetworkPacketAnalyzer.entities.Flow.Flow.total_packet_length">
+<em class="property">property </em><code class="sig-name descname">total_packet_length</code><a class="headerlink" href="#NetworkPacketAnalyzer.entities.Flow.Flow.total_packet_length" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="module-NetworkPacketAnalyzer.entities">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-NetworkPacketAnalyzer.entities" title="永久链接至标题">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="NetworkPacketAnalyzer.utils.html" class="btn btn-neutral float-right" title="NetworkPacketAnalyzer.utils package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="NetworkPacketAnalyzer.analyzer.html" class="btn btn-neutral float-left" title="NetworkPacketAnalyzer.analyzer package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 版权所有 2020, Asuka Mao
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

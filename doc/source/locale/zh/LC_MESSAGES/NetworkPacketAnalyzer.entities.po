@@ -1,0 +1,1002 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, Asuka Mao
+# This file is distributed under the same license as the
+# NetworkPacketAnalyzer package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: NetworkPacketAnalyzer \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-08-03 17:33+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.8.0\n"
+
+#: ../../source/NetworkPacketAnalyzer.entities.rst:2
+msgid "NetworkPacketAnalyzer.entities package"
+msgstr ""
+
+#: ../../source/NetworkPacketAnalyzer.entities.rst:5
+msgid "Submodules"
+msgstr ""
+
+#: ../../source/NetworkPacketAnalyzer.entities.rst:8
+msgid "NetworkPacketAnalyzer.entities.BasicPacket module"
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.BasicPacket:1 of
+msgid "This module defines the basic packet class."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.BasicPacket:3 of
+msgid ""
+"The packet class is extracted from the IP object of "
+"`scapy.layers.inet.IP`."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket:1
+#: NetworkPacketAnalyzer.entities.Flow.Flow:1 of
+msgid "Bases: :class:`object`"
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket:1 of
+msgid "The basic packet class."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket
+#: NetworkPacketAnalyzer.entities.Flow.Flow
+#: NetworkPacketAnalyzer.entities.Flow.Flow.add_packet of
+msgid "Parameters"
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket:3
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket:12 of
+msgid "The global ID of the packet."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket:5
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket:18 of
+msgid "The arrival time of the packet. (in microsecond)"
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket:7 of
+msgid "The packet extracted from `scapy`."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket
+#: NetworkPacketAnalyzer.entities.Flow.Flow of
+msgid "type"
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket:14
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket:20
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket:38
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket:80
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket:86
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket:92
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket:98
+#: NetworkPacketAnalyzer.entities.Flow.Flow:37
+#: NetworkPacketAnalyzer.entities.Flow.Flow:49
+#: NetworkPacketAnalyzer.entities.Flow.Flow:55
+#: NetworkPacketAnalyzer.entities.Flow.Flow:61
+#: NetworkPacketAnalyzer.entities.Flow.Flow:67
+#: NetworkPacketAnalyzer.entities.Flow.Flow:73
+#: NetworkPacketAnalyzer.entities.Flow.Flow:145 of
+msgid "int"
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket:24 of
+msgid "The source IP of the packet."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket:26
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket:32
+#: NetworkPacketAnalyzer.entities.Flow.Flow:25
+#: NetworkPacketAnalyzer.entities.Flow.Flow:31
+#: NetworkPacketAnalyzer.entities.Flow.Flow:43 of
+msgid "str"
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket:30 of
+msgid "The destination IP of the packet."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket:36 of
+msgid ""
+"The procotol number of the packet. For TCP is 6, for UDP is 17, for "
+"others is 0."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket:42 of
+msgid "True if the packet has flag \"ACK\"."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket:44
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket:50
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket:56
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket:62
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket:68
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket:74 of
+msgid "bool"
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket:48 of
+msgid "True if the packet has flag \"FIN\"."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket:54 of
+msgid "True if the packet has flag \"RST\"."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket:60 of
+msgid "True if the packet has flag \"PSH\"."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket:66 of
+msgid "True if the packet has flag \"SYN\"."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket:72 of
+msgid "True if the packet has flag \"URG\"."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket:78 of
+msgid "The initial window size in the packet. (Only for TCP)"
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket:84 of
+msgid ""
+"The header size of the packet, including IP header and transportation "
+"layer header."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket:90 of
+msgid "The payload size of the packet."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket:96 of
+msgid "The length of the whole packet. (Excluding the MAC layer header)"
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket.backward_flow_id:1 of
+msgid "Generate the backward flow ID of this packet."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket.backward_flow_id
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket.forward_flow_id
+#: NetworkPacketAnalyzer.entities.Flow.Flow.backward_bytes_rate
+#: NetworkPacketAnalyzer.entities.Flow.Flow.backward_packet_count
+#: NetworkPacketAnalyzer.entities.Flow.Flow.backward_packet_rate
+#: NetworkPacketAnalyzer.entities.Flow.Flow.bytes_rate
+#: NetworkPacketAnalyzer.entities.Flow.Flow.flow_duration
+#: NetworkPacketAnalyzer.entities.Flow.Flow.forward_bytes_rate
+#: NetworkPacketAnalyzer.entities.Flow.Flow.forward_packet_count
+#: NetworkPacketAnalyzer.entities.Flow.Flow.forward_packet_rate
+#: NetworkPacketAnalyzer.entities.Flow.Flow.init_window_size
+#: NetworkPacketAnalyzer.entities.Flow.Flow.max_backward_packet_header_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.max_backward_packet_interval
+#: NetworkPacketAnalyzer.entities.Flow.Flow.max_backward_packet_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.max_backward_packet_payload_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.max_forward_packet_header_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.max_forward_packet_interval
+#: NetworkPacketAnalyzer.entities.Flow.Flow.max_forward_packet_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.max_forward_packet_payload_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.max_packet_interval
+#: NetworkPacketAnalyzer.entities.Flow.Flow.max_packet_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.mean_backward_packet_header_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.mean_backward_packet_interval
+#: NetworkPacketAnalyzer.entities.Flow.Flow.mean_backward_packet_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.mean_backward_packet_payload_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.mean_forward_packet_header_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.mean_forward_packet_interval
+#: NetworkPacketAnalyzer.entities.Flow.Flow.mean_forward_packet_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.mean_forward_packet_payload_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.mean_packet_interval
+#: NetworkPacketAnalyzer.entities.Flow.Flow.mean_packet_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.min_backward_packet_header_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.min_backward_packet_interval
+#: NetworkPacketAnalyzer.entities.Flow.Flow.min_backward_packet_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.min_backward_packet_payload_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.min_forward_packet_header_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.min_forward_packet_interval
+#: NetworkPacketAnalyzer.entities.Flow.Flow.min_forward_packet_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.min_forward_packet_payload_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.min_packet_interval
+#: NetworkPacketAnalyzer.entities.Flow.Flow.min_packet_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.packet_count
+#: NetworkPacketAnalyzer.entities.Flow.Flow.packet_rate
+#: NetworkPacketAnalyzer.entities.Flow.Flow.std_backward_packet_header_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.std_backward_packet_interval
+#: NetworkPacketAnalyzer.entities.Flow.Flow.std_backward_packet_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.std_backward_packet_payload_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.std_forward_packet_header_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.std_forward_packet_interval
+#: NetworkPacketAnalyzer.entities.Flow.Flow.std_forward_packet_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.std_forward_packet_payload_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.std_packet_interval
+#: NetworkPacketAnalyzer.entities.Flow.Flow.std_packet_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.tcp_flags
+#: NetworkPacketAnalyzer.entities.Flow.Flow.total_backward_packet_header_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.total_backward_packet_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.total_backward_packet_payload_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.total_forward_packet_header_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.total_forward_packet_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.total_forward_packet_payload_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.total_packet_length of
+msgid "Returns"
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket.backward_flow_id:3 of
+msgid "The backward flow ID."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket.backward_flow_id
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket.forward_flow_id
+#: NetworkPacketAnalyzer.entities.Flow.Flow.backward_bytes_rate
+#: NetworkPacketAnalyzer.entities.Flow.Flow.backward_packet_count
+#: NetworkPacketAnalyzer.entities.Flow.Flow.backward_packet_rate
+#: NetworkPacketAnalyzer.entities.Flow.Flow.bytes_rate
+#: NetworkPacketAnalyzer.entities.Flow.Flow.flow_duration
+#: NetworkPacketAnalyzer.entities.Flow.Flow.forward_bytes_rate
+#: NetworkPacketAnalyzer.entities.Flow.Flow.forward_packet_count
+#: NetworkPacketAnalyzer.entities.Flow.Flow.forward_packet_rate
+#: NetworkPacketAnalyzer.entities.Flow.Flow.init_window_size
+#: NetworkPacketAnalyzer.entities.Flow.Flow.max_backward_packet_header_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.max_backward_packet_interval
+#: NetworkPacketAnalyzer.entities.Flow.Flow.max_backward_packet_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.max_backward_packet_payload_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.max_forward_packet_header_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.max_forward_packet_interval
+#: NetworkPacketAnalyzer.entities.Flow.Flow.max_forward_packet_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.max_forward_packet_payload_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.max_packet_interval
+#: NetworkPacketAnalyzer.entities.Flow.Flow.max_packet_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.mean_backward_packet_header_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.mean_backward_packet_interval
+#: NetworkPacketAnalyzer.entities.Flow.Flow.mean_backward_packet_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.mean_backward_packet_payload_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.mean_forward_packet_header_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.mean_forward_packet_interval
+#: NetworkPacketAnalyzer.entities.Flow.Flow.mean_forward_packet_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.mean_forward_packet_payload_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.mean_packet_interval
+#: NetworkPacketAnalyzer.entities.Flow.Flow.mean_packet_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.min_backward_packet_header_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.min_backward_packet_interval
+#: NetworkPacketAnalyzer.entities.Flow.Flow.min_backward_packet_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.min_backward_packet_payload_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.min_forward_packet_header_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.min_forward_packet_interval
+#: NetworkPacketAnalyzer.entities.Flow.Flow.min_forward_packet_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.min_forward_packet_payload_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.min_packet_interval
+#: NetworkPacketAnalyzer.entities.Flow.Flow.min_packet_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.packet_count
+#: NetworkPacketAnalyzer.entities.Flow.Flow.packet_rate
+#: NetworkPacketAnalyzer.entities.Flow.Flow.std_backward_packet_header_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.std_backward_packet_interval
+#: NetworkPacketAnalyzer.entities.Flow.Flow.std_backward_packet_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.std_backward_packet_payload_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.std_forward_packet_header_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.std_forward_packet_interval
+#: NetworkPacketAnalyzer.entities.Flow.Flow.std_forward_packet_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.std_forward_packet_payload_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.std_packet_interval
+#: NetworkPacketAnalyzer.entities.Flow.Flow.std_packet_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.total_backward_packet_header_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.total_backward_packet_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.total_backward_packet_payload_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.total_forward_packet_header_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.total_forward_packet_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.total_forward_packet_payload_length
+#: NetworkPacketAnalyzer.entities.Flow.Flow.total_packet_length of
+msgid "Return type"
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket.forward_flow_id:1 of
+msgid "Generate the forward flow ID of this packet."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.BasicPacket.BasicPacket.forward_flow_id:3 of
+msgid "The forward flow ID."
+msgstr ""
+
+#: ../../source/NetworkPacketAnalyzer.entities.rst:16
+msgid "NetworkPacketAnalyzer.entities.Flow module"
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow:1 of
+msgid "This module defines the flow entity."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow:3 of
+msgid ""
+"Every flow is divided to two directions, forward and backward. When a "
+"packet comes, it is judged by its header information and classified to "
+"forward packet and backward packet."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow:7 of
+msgid ""
+"When every packet belongs to this flow joined, the related statistics "
+"will be updated."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow:1 of
+msgid "The flow entity."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow:5 of
+msgid "The logger to log the processing."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow:7 of
+msgid "MyLogger"
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow:11 of
+msgid "A list to save forward packets."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow:13
+#: NetworkPacketAnalyzer.entities.Flow.Flow:19 of
+msgid "list of BasicPacket"
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow:17 of
+msgid "A list to save backward packets."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow:23 of
+msgid "The flow id with format \"SrcIP-SrcPort-DstIP-DstPort-Protocol\""
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow:29 of
+msgid "The source IP of the flow."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow:35 of
+msgid "The source port of the flow."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow:41 of
+msgid "The destination IP of the flow."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow:47 of
+msgid "The destination Port of the flow."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow:53 of
+msgid "The protocol number of the flow. (TCP=6, UDP=17, Others=0)"
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow:59 of
+msgid "The start time of the flow. (in microseconds)"
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow:65 of
+msgid "The end time of the flow. (in microseconds)"
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow:71 of
+msgid "The timeout of the flow. (in microsecons)"
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow:77 of
+msgid "The statistics of packet length in the flow."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow:79
+#: NetworkPacketAnalyzer.entities.Flow.Flow:85
+#: NetworkPacketAnalyzer.entities.Flow.Flow:91
+#: NetworkPacketAnalyzer.entities.Flow.Flow:97
+#: NetworkPacketAnalyzer.entities.Flow.Flow:103
+#: NetworkPacketAnalyzer.entities.Flow.Flow:109
+#: NetworkPacketAnalyzer.entities.Flow.Flow:115
+#: NetworkPacketAnalyzer.entities.Flow.Flow:121
+#: NetworkPacketAnalyzer.entities.Flow.Flow:127
+#: NetworkPacketAnalyzer.entities.Flow.Flow:133
+#: NetworkPacketAnalyzer.entities.Flow.Flow:139 of
+msgid "FlowStatistics"
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow:83 of
+msgid "The statistics of packet header length in the flow."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow:89 of
+msgid "The statistics of packet payload length in the flow."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow:95 of
+msgid "The statistics of forward packet length in the flow."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow:101 of
+msgid "The statistics of forward packet header length in the flow."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow:107 of
+msgid "The statistics of forward packet payload length in the flow."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow:113 of
+msgid "The statistics of forward packet interval in the flow."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow:119 of
+msgid "The statistics of backward packet length in the flow."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow:125 of
+msgid "The statistics of backward packet header length in the flow."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow:131 of
+msgid "The statistics of backward packet payload length in the flow."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow:137 of
+msgid "The statistics of backward packet interval in the flow."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow:143 of
+msgid "Current flow status."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow:147 of
+msgid "The first packet of this flow, which used to construct the flow."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow:149 of
+msgid "The flow timeout."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow:154 of
+msgid ":class:`FlowStatus`"
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow:155 of
+msgid "The flow status enum."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.add_packet:1 of
+msgid "Add the packet into the flow and update informations."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.add_packet:3 of
+msgid "The packet to be added."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.backward_bytes_rate:1 of
+msgid "Returns the number of bytes per second in the backward flow."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.backward_bytes_rate:3
+#: NetworkPacketAnalyzer.entities.Flow.Flow.bytes_rate:3
+#: NetworkPacketAnalyzer.entities.Flow.Flow.forward_bytes_rate:3 of
+msgid "The number of bytes per second."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.backward_packet_count:1 of
+msgid "Returns the number of packets in the backward flow."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.backward_packet_count:3 of
+msgid "The backward packet counts."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.backward_packet_rate:1 of
+msgid "Returns the number of packets per second in the backward flow."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.backward_packet_rate:3
+#: NetworkPacketAnalyzer.entities.Flow.Flow.forward_packet_rate:3
+#: NetworkPacketAnalyzer.entities.Flow.Flow.packet_rate:3 of
+msgid "The number of packets per second."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.bytes_rate:1 of
+msgid "Returns the number of bytes per second in the whole flow."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.flow_duration:1 of
+msgid "Returns the flow duration."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.flow_duration:3 of
+msgid "The flow duration."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.forward_bytes_rate:1 of
+msgid "Returns the number of bytes per second in the forward flow."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.forward_packet_count:1 of
+msgid "Returns the number of packets in the forward flow."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.forward_packet_count:3 of
+msgid "The forward packet counts."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.forward_packet_rate:1 of
+msgid "Returns the number of packets per second in the forward flow."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.init_window_size:1 of
+msgid ""
+"Returns the initial window size of the first packet in the flow. (Only "
+"for TCP)"
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.init_window_size:3 of
+msgid "The first window size."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.max_backward_packet_header_length:1
+#: of
+msgid "Returns the maximum of header length of backward packets."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.max_backward_packet_header_length:3
+#: of
+msgid "The maximum backward header length."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.max_backward_packet_interval:1 of
+msgid "Returns the maximum interval of packet arriving in backward."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.max_backward_packet_interval:3 of
+msgid "The maximum backward packet interval."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.max_backward_packet_length:1 of
+msgid "Returns the maximum packet length of backward packets."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.max_backward_packet_length:3 of
+msgid "The maximum backward packet length."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.max_backward_packet_payload_length:1
+#: of
+msgid "Returns the maximum payload length of backward packets."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.max_backward_packet_payload_length:3
+#: of
+msgid "The maximum backward payload length."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.max_forward_packet_header_length:1
+#: of
+msgid "Returns the maximum of header length of forward packets."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.max_forward_packet_header_length:3
+#: of
+msgid "The maximum forward header length."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.max_forward_packet_interval:1 of
+msgid "Returns the maximum interval of packet arriving in forward."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.max_forward_packet_interval:3 of
+msgid "The maximum forward packet interval."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.max_forward_packet_length:1 of
+msgid "Returns the maximum packet length of forward packets."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.max_forward_packet_length:3
+#: NetworkPacketAnalyzer.entities.Flow.Flow.max_packet_length:3 of
+msgid "The maximum packet length."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.max_forward_packet_payload_length:1
+#: of
+msgid "Returns the maximum payload length of forward packets."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.max_forward_packet_payload_length:3
+#: of
+msgid "The maximum forward payload length."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.max_packet_interval:1 of
+msgid "Returns the maximum interval of packet arriving in both side."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.max_packet_interval:3 of
+msgid "The maximum packet interval."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.max_packet_length:1 of
+msgid "Returns the maximum packet length of all packets."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.mean_backward_packet_header_length:1
+#: of
+msgid "Returns the average of header length of backward packets."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.mean_backward_packet_header_length:3
+#: of
+msgid "The average backward header length."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.mean_backward_packet_interval:1 of
+msgid "Returns the average interval of packet arriving in backward."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.mean_backward_packet_interval:3 of
+msgid "The average backward packet interval."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.mean_backward_packet_length:1 of
+msgid "Returns the average packet length of backward packets."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.mean_backward_packet_length:3 of
+msgid "The average backward packet length."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.mean_backward_packet_payload_length:1
+#: of
+msgid "Returns the average payload length of backward packets."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.mean_backward_packet_payload_length:3
+#: of
+msgid "The average backward payload length."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.mean_forward_packet_header_length:1
+#: of
+msgid "Returns the average of header length of forward packets."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.mean_forward_packet_header_length:3
+#: of
+msgid "The average forward header length."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.mean_forward_packet_interval:1 of
+msgid "Returns the average interval of packet arriving in forward."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.mean_forward_packet_interval:3 of
+msgid "The average forward  packet interval."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.mean_forward_packet_length:1 of
+msgid "Returns the average packet length of forward packets."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.mean_forward_packet_length:3
+#: NetworkPacketAnalyzer.entities.Flow.Flow.mean_packet_length:3 of
+msgid "The average packet length."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.mean_forward_packet_payload_length:1
+#: of
+msgid "Returns the average payload length of forward packets."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.mean_forward_packet_payload_length:3
+#: of
+msgid "The average forward payload length."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.mean_packet_interval:1 of
+msgid "Returns the average interval of packet arriving in both side."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.mean_packet_interval:3 of
+msgid "The average packet interval."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.mean_packet_length:1 of
+msgid "Returns the average packet length of all packets."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.min_backward_packet_header_length:1
+#: of
+msgid "Returns the minimum of header length of backward packets."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.min_backward_packet_header_length:3
+#: of
+msgid "The minimum backward header length."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.min_backward_packet_interval:1 of
+msgid "Returns the minimum interval of packet arriving in backward."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.min_backward_packet_interval:3 of
+msgid "The minimum backward  packet interval."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.min_backward_packet_length:1 of
+msgid "Returns the mininum packet length of backward packets."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.min_backward_packet_length:3 of
+msgid "The minimum backward packet length."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.min_backward_packet_payload_length:1
+#: of
+msgid "Returns the minimum payload length of backward packets."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.min_backward_packet_payload_length:3
+#: of
+msgid "The minimum backward payload length."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.min_forward_packet_header_length:1
+#: of
+msgid "Returns the minimum of header length of forward packets."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.min_forward_packet_header_length:3
+#: of
+msgid "The minimum forward header length."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.min_forward_packet_interval:1 of
+msgid "Returns the minimum interval of packet arriving in forward."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.min_forward_packet_interval:3 of
+msgid "The minimum forward  packet interval."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.min_forward_packet_length:1 of
+msgid "Returns the minimum packet length of forward packets."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.min_forward_packet_length:3
+#: NetworkPacketAnalyzer.entities.Flow.Flow.min_packet_length:3 of
+msgid "The minimum packet length."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.min_forward_packet_payload_length:1
+#: of
+msgid "Returns the minimum payload length of forward packets."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.min_forward_packet_payload_length:3
+#: of
+msgid "The minimum forward payload length."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.min_packet_interval:1 of
+msgid "Returns the minimum interval of packet arriving in both side."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.min_packet_interval:3 of
+msgid "The minimum packet interval."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.min_packet_length:1 of
+msgid "Returns the minimum packet length of all packets."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.packet_count:1 of
+msgid "Returns the number of packets in the whole flow."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.packet_count:3 of
+msgid "The full packet counts."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.packet_rate:1 of
+msgid "Returns the number of packets per second in the whole flow."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.std_backward_packet_header_length:1
+#: of
+msgid "Returns the standard deviation of header length of backward packets."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.std_backward_packet_header_length:3
+#: of
+msgid "The standard deviation of backward header length."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.std_backward_packet_interval:1 of
+msgid "Returns the standard deviation of interval of packet arriving in backward."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.std_backward_packet_interval:3 of
+msgid "The standard deviation of backward packet interval."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.std_backward_packet_length:1 of
+msgid "Returns the standard deviation of packet length of backward packets."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.std_backward_packet_length:3 of
+msgid "The standard deviation of backward packet length."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.std_backward_packet_payload_length:1
+#: of
+msgid "Returns the standard deviation of payload length of backward packets."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.std_backward_packet_payload_length:3
+#: of
+msgid "The standard deviation of backward payload length."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.std_forward_packet_header_length:1
+#: of
+msgid "Returns the standard deviation of header length of forward packets."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.std_forward_packet_header_length:3
+#: of
+msgid "The standard deviation  forward header length."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.std_forward_packet_interval:1 of
+msgid "Returns the standard deviation of interval of packet arriving in forward."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.std_forward_packet_interval:3 of
+msgid "The standard deviation of forward packet interval."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.std_forward_packet_length:1 of
+msgid "Returns the standard deviation of packet length of forward packets."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.std_forward_packet_length:3
+#: NetworkPacketAnalyzer.entities.Flow.Flow.std_packet_length:3 of
+msgid "The standard deviation of packet length."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.std_forward_packet_payload_length:1
+#: of
+msgid "Returns the standard deviation of payload length of forward packets."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.std_forward_packet_payload_length:3
+#: of
+msgid "The standard deviation of forward payload length."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.std_packet_interval:1 of
+msgid ""
+"Returns the standard deviation of interval of packet arriving in both "
+"side."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.std_packet_interval:3 of
+msgid "The standard deviation of packet interval."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.std_packet_length:1 of
+msgid "Returns the standard deviation of packet length of all packets."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.tcp_flags:1 of
+msgid "Returns the tcp flags count. (Only for TCP packets)"
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.tcp_flags:3 of
+msgid ""
+"* **syn_count** (*int*) -- The number of SYN flags. * **ack_count** "
+"(*int*) -- The number of ACK flags. * **rst_count** (*int*) -- The number"
+" of RST flags. * **urg_count** (*int*) -- The number of URG flags. * "
+"**psh_count** (*int*) -- The number of PSH flags. * **fin_count** (*int*)"
+" -- The number of FIN flags."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.tcp_flags:3 of
+msgid "**syn_count** (*int*) -- The number of SYN flags."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.tcp_flags:4 of
+msgid "**ack_count** (*int*) -- The number of ACK flags."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.tcp_flags:5 of
+msgid "**rst_count** (*int*) -- The number of RST flags."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.tcp_flags:6 of
+msgid "**urg_count** (*int*) -- The number of URG flags."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.tcp_flags:7 of
+msgid "**psh_count** (*int*) -- The number of PSH flags."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.tcp_flags:8 of
+msgid "**fin_count** (*int*) -- The number of FIN flags."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.total_backward_packet_header_length:1
+#: of
+msgid "Returns the header length of backward packets."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.total_backward_packet_header_length:3
+#: of
+msgid "The backward header length."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.total_backward_packet_length:1 of
+msgid "Returns the packet length of backward packets."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.total_backward_packet_length:3 of
+msgid "The total backward packet length."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.total_backward_packet_payload_length:1
+#: of
+msgid "Returns the payload length of backward packets."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.total_backward_packet_payload_length:3
+#: of
+msgid "The backward payload length."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.total_forward_packet_header_length:1
+#: of
+msgid "Returns the header length of forward packets."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.total_forward_packet_header_length:3
+#: of
+msgid "The forward header length."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.total_forward_packet_length:1 of
+msgid "Returns the packet length of forward packets."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.total_forward_packet_length:3 of
+msgid "The total forward packet length."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.total_forward_packet_payload_length:1
+#: of
+msgid "Returns the payload length of forward packets."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.total_forward_packet_payload_length:3
+#: of
+msgid "The forward forward payload length."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.total_packet_length:1 of
+msgid "Returns the total packet length."
+msgstr ""
+
+#: NetworkPacketAnalyzer.entities.Flow.Flow.total_packet_length:3 of
+msgid "Total packet length."
+msgstr ""
+
+#: ../../source/NetworkPacketAnalyzer.entities.rst:25
+msgid "Module contents"
+msgstr ""
+
