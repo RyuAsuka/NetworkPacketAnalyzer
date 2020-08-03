@@ -1,11 +1,12 @@
 """
-Flow
-====
+This module defines the flow entity.
 
-定义流的实体。
+Every flow is divided to two directions, forward and backward.
+When a packet comes, it is judged by its header information and
+classified to forward packet and backward packet.
 
-每一个流分为前后两个方向。当一个包到来时，会根据它的头部信息判断它属于前向包还是后向包。
-每一个属于该流的数据包被加入该流时，相应的统计量会进行更新。
+When every packet belongs to this flow joined, the related statistics
+will be updated.
 """
 
 from NetworkPacketAnalyzer.entities.BasicPacket import BasicPacket
@@ -16,64 +17,70 @@ from NetworkPacketAnalyzer.utils.FlowStatus import FlowStatus
 
 class Flow(object):
     """
-    定义流。
+    The flow entity.
 
     Attributes
     ----------
     logger: MyLogger
-        用于记录日志。
+        The logger to log the processing.
     _forward: list of BasicPacket
-        用于存放前向数据包。
+        A list to save forward packets.
     _backward: list of BasicPacket
-        用于存放后向数据包。
+        A list to save backward packets.
     flow_id: str
-        流 ID。格式：源 IP-源端口-目的IP-目的端口-协议号。
+        The flow id with format "SrcIP-SrcPort-DstIP-DstPort-Protocol"
     src_ip: str
-        流的源IP
+        The source IP of the flow.
     src_port: int
-        流的源端口
+        The source port of the flow.
     dst_ip: str
-        流的目的IP
+        The destination IP of the flow.
     dst_port: int
-        流的目的端口
+        The destination Port of the flow.
     protocol: int
-        流的协议号（TCP=6，UDP=17，其他=0）
+        The protocol number of the flow. (TCP=6, UDP=17, Others=0)
     start_time: int
-        流的起始时间（微秒）
+        The start time of the flow. (in microseconds)
     end_time: int
-        流的结束时间（微秒）
+        The end time of the flow. (in microseconds)
     flow_timeout: int
-        流超时时间（微秒）
+        The timeout of the flow. (in microsecons)
     packet_length_stats: FlowStatistics
-        统计流中所有包的总长度的统计量。
+        The statistics of packet length in the flow.
     packet_header_length_stats: FlowStatistics
-        统计流中头部总长度的统计量。
+        The statistics of packet header length in the flow.
     packet_payload_length_stats: FlowStatistics
-        统计流中负载总长度的统计量。
+        The statistics of packet payload length in the flow.
     forward_packet_length_stats: FlowStatistics
-        统计前向流中包的总长度的统计量。
+        The statistics of forward packet length in the flow.
     forward_packet_header_length_stats: FlowStatistics
-        统计前向流中包的头部总长度的统计量。
+        The statistics of forward packet header length in the flow.
     forward_packet_payload_length_stats: FlowStatistics
-        统计前向流中包的负载总长度的统计量。
+        The statistics of forward packet payload length in the flow.
     forward_packet_interval_stats: FlowStatistics
-        统计前向流中包的间隔时间的统计量。
+        The statistics of forward packet interval in the flow.
     backward_packet_length_stats: FlowStatistics
-        统计后向流中包的总长度的统计量。
+        The statistics of backward packet length in the flow.
     backward_packet_header_length_stats: FlowStatistics
-        统计后向流中包的头部总长度的统计量。
+        The statistics of backward packet header length in the flow.
     backward_packet_payload_length_stats: FlowStatistics
-        统计后向流中包的负载总长度的统计量。
+        The statistics of backward packet payload length in the flow.
     backward_packet_interval_stats: FlowStatistics
-        统计后向流中包的间隔时间的统计量。
+        The statistics of backward packet interval in the flow.
+    flow_status : int
+        Current flow status.
 
 
     Parameters
     ----------
-    first_packet: BasicPacket
-        该流的第一个包，用于构造流
-    flow_timeout: int
-        指定流超时时间
+    first_packet : BasicPacket
+        The first packet of this flow, which used to construct the flow.
+    flow_timeout : int
+        The flow timeout.
+
+    See Also
+    --------
+    FlowStatus : The flow status enum.
     """
     def __init__(self, first_packet, flow_timeout):
         self.logger = MyLogger('Flow')
@@ -83,7 +90,7 @@ class Flow(object):
         self.end_time = 0
         self.flow_timeout = flow_timeout
 
-        # 统计量
+        # Statistics
         self.packet_length_stats = FlowStatistics()
         self.packet_header_length_stats = FlowStatistics()
         self.packet_payload_length_stats = FlowStatistics()
@@ -106,12 +113,15 @@ class Flow(object):
 
     def _parse_flow_id(self):
         """
-        若流ID 存在，将流 ID 对应的源IP、源端口、目的IP、目的端口、协议号解析出来并放入相应参数中。
+        Parse the basic 5-tuple from flow ID.
+
+        If the flow ID exists, it will be extracted to SrcIP, SrcPort, DstIP, DstPort and protocols, and they will
+        be put into the corresponding attributes.
 
         Returns
         -------
-        tuple(str, int, str, int, int):
-            分别返回源IP、源端口、目的IP、目的端口、协议号。
+        tuple of (str, int, str, int, int):
+            Returns SrcIP, SrcPort, DstIP, DstPort, protocol.
         """
         if self.flow_id:
             split_id = self.flow_id.split('-')
@@ -121,17 +131,19 @@ class Flow(object):
 
     def _add_first_packet(self, packet):
         """
-        当流为空流时，第一个到达的数据包触发该方法。
+        Add the first packet into a flow.
+
+        This method should only invoke once when the flow is empty.
 
         Parameters
         ----------
         packet: BasicPacket
-            流中第一个包。
+            The first packet of the flow.
 
         Returns
         -------
         str:
-            第一个包对应的 Flow ID.
+            The flow ID of the first packet.
         """
         self._forward.append(packet)
         self.start_time = packet.timestamp
@@ -149,12 +161,12 @@ class Flow(object):
 
     def add_packet(self, packet):
         """
-        向流中添加包，并更新流信息
+        Add the packet into the flow and update informations.
 
         Parameters
         ----------
         packet: BasicPacket
-            待添加的 IP 包。
+            The packet to be added.
         """
         if not packet:
             return
@@ -182,198 +194,576 @@ class Flow(object):
 
     @property
     def flow_duration(self):
+        """
+        Returns the flow duration.
+
+        Returns
+        -------
+        int
+            The flow duration.
+        """
         return self.end_time - self.start_time
 
     @property
     def total_packet_length(self):
+        """
+        Returns the total packet length.
+
+        Returns
+        -------
+        int
+            Total packet length.
+        """
         return self.packet_length_stats.sum()
 
     @property
     def min_packet_length(self):
+        """
+        Returns the minimum packet length of all packets.
+
+        Returns
+        -------
+        int
+            The minimum packet length.
+        """
         return self.packet_length_stats.min()
 
     @property
     def max_packet_length(self):
+        """
+        Returns the maximum packet length of all packets.
+
+        Returns
+        -------
+        int
+            The maximum packet length.
+        """
         return self.packet_length_stats.max()
 
     @property
     def mean_packet_length(self):
+        """
+        Returns the average packet length of all packets.
+
+        Returns
+        -------
+        int
+            The average packet length.
+        """
         return self.packet_length_stats.mean()
 
     @property
     def std_packet_length(self):
+        """
+        Returns the standard deviation of packet length of all packets.
+
+        Returns
+        -------
+        int
+            The standard deviation of packet length.
+        """
         return self.packet_length_stats.std()
 
     @property
     def total_forward_packet_length(self):
+        """
+        Returns the packet length of forward packets.
+
+        Returns
+        -------
+        int
+            The total forward packet length.
+        """
         return self.forward_packet_length_stats.sum()
 
     @property
     def min_forward_packet_length(self):
+        """
+        Returns the minimum packet length of forward packets.
+
+        Returns
+        -------
+        int
+            The minimum packet length.
+        """
         return self.forward_packet_length_stats.min()
 
     @property
     def max_forward_packet_length(self):
+        """
+        Returns the maximum packet length of forward packets.
+
+        Returns
+        -------
+        int
+            The maximum packet length.
+        """
         return self.forward_packet_length_stats.max()
 
     @property
     def mean_forward_packet_length(self):
+        """
+        Returns the average packet length of forward packets.
+
+        Returns
+        -------
+        int
+            The average packet length.
+        """
         return self.forward_packet_length_stats.mean()
 
     @property
     def std_forward_packet_length(self):
+        """
+        Returns the standard deviation of packet length of forward packets.
+
+        Returns
+        -------
+        int
+            The standard deviation of packet length.
+        """
         return self.forward_packet_length_stats.std()
 
     @property
     def total_backward_packet_length(self):
+        """
+        Returns the packet length of backward packets.
+
+        Returns
+        -------
+        int
+            The total backward packet length.
+        """
         return self.backward_packet_length_stats.sum()
 
     @property
     def min_backward_packet_length(self):
+        """
+        Returns the mininum packet length of backward packets.
+
+        Returns
+        -------
+        int
+            The minimum backward packet length.
+        """
         return self.backward_packet_length_stats.min()
 
     @property
     def max_backward_packet_length(self):
+        """
+        Returns the maximum packet length of backward packets.
+
+        Returns
+        -------
+        int
+            The maximum backward packet length.
+        """
         return self.backward_packet_length_stats.max()
 
     @property
     def mean_backward_packet_length(self):
+        """
+        Returns the average packet length of backward packets.
+
+        Returns
+        -------
+        int
+            The average backward packet length.
+        """
         return self.backward_packet_length_stats.mean()
 
     @property
     def std_backward_packet_length(self):
+        """
+        Returns the standard deviation of packet length of backward packets.
+
+        Returns
+        -------
+        int
+            The standard deviation of backward packet length.
+        """
         return self.backward_packet_length_stats.std()
 
     @property
     def total_forward_packet_header_length(self):
+        """
+        Returns the header length of forward packets.
+
+        Returns
+        -------
+        int
+            The forward header length.
+        """
         return self.forward_packet_header_length_stats.sum()
 
     @property
     def min_forward_packet_header_length(self):
+        """
+        Returns the minimum of header length of forward packets.
+
+        Returns
+        -------
+        int
+            The minimum forward header length.
+        """
         return self.forward_packet_header_length_stats.min()
 
     @property
     def max_forward_packet_header_length(self):
+        """
+        Returns the maximum of header length of forward packets.
+
+        Returns
+        -------
+        int
+            The maximum forward header length.
+        """
         return self.forward_packet_header_length_stats.max()
 
     @property
     def mean_forward_packet_header_length(self):
+        """
+        Returns the average of header length of forward packets.
+
+        Returns
+        -------
+        int
+            The average forward header length.
+        """
         return self.forward_packet_header_length_stats.mean()
 
     @property
     def std_forward_packet_header_length(self):
+        """
+        Returns the standard deviation of header length of forward packets.
+
+        Returns
+        -------
+        int
+            The standard deviation  forward header length.
+        """
         return self.forward_packet_header_length_stats.std()
 
     @property
     def total_backward_packet_header_length(self):
+        """
+        Returns the header length of backward packets.
+
+        Returns
+        -------
+        int
+            The backward header length.
+        """
         return self.backward_packet_header_length_stats.sum()
 
     @property
     def min_backward_packet_header_length(self):
+        """
+        Returns the minimum of header length of backward packets.
+
+        Returns
+        -------
+        int
+            The minimum backward header length.
+        """
         return self.backward_packet_header_length_stats.min()
 
     @property
     def max_backward_packet_header_length(self):
+        """
+        Returns the maximum of header length of backward packets.
+
+        Returns
+        -------
+        int
+            The maximum backward header length.
+        """
         return self.backward_packet_header_length_stats.max()
 
     @property
     def mean_backward_packet_header_length(self):
+        """
+        Returns the average of header length of backward packets.
+
+        Returns
+        -------
+        int
+            The average backward header length.
+        """
         return self.backward_packet_header_length_stats.mean()
 
     @property
     def std_backward_packet_header_length(self):
+        """
+        Returns the standard deviation of header length of backward packets.
+
+        Returns
+        -------
+        int
+            The standard deviation of backward header length.
+        """
         return self.backward_packet_header_length_stats.std()
 
     @property
     def total_forward_packet_payload_length(self):
+        """
+        Returns the payload length of forward packets.
+
+        Returns
+        -------
+        int
+            The forward forward payload length.
+        """
         return self.forward_packet_header_length_stats.sum()
 
     @property
     def min_forward_packet_payload_length(self):
+        """
+        Returns the minimum payload length of forward packets.
+
+        Returns
+        -------
+        int
+            The minimum forward payload length.
+        """
         return self.forward_packet_header_length_stats.min()
 
     @property
     def max_forward_packet_payload_length(self):
+        """
+        Returns the maximum payload length of forward packets.
+
+        Returns
+        -------
+        int
+            The maximum forward payload length.
+        """
         return self.forward_packet_header_length_stats.max()
 
     @property
     def mean_forward_packet_payload_length(self):
+        """
+        Returns the average payload length of forward packets.
+
+        Returns
+        -------
+        int
+            The average forward payload length.
+        """
         return self.forward_packet_header_length_stats.mean()
 
     @property
     def std_forward_packet_payload_length(self):
+        """
+        Returns the standard deviation of payload length of forward packets.
+
+        Returns
+        -------
+        int
+            The standard deviation of forward payload length.
+        """
         return self.forward_packet_header_length_stats.std()
 
     @property
     def total_backward_packet_payload_length(self):
+        """
+        Returns the payload length of backward packets.
+
+        Returns
+        -------
+        int
+            The backward payload length.
+        """
         return self.backward_packet_header_length_stats.sum()
 
     @property
     def min_backward_packet_payload_length(self):
+        """
+        Returns the minimum payload length of backward packets.
+
+        Returns
+        -------
+        int
+            The minimum backward payload length.
+        """
         return self.backward_packet_header_length_stats.min()
 
     @property
     def max_backward_packet_payload_length(self):
+        """
+        Returns the maximum payload length of backward packets.
+
+        Returns
+        -------
+        int
+            The maximum backward payload length.
+        """
         return self.backward_packet_header_length_stats.max()
 
     @property
     def mean_backward_packet_payload_length(self):
+        """
+        Returns the average payload length of backward packets.
+
+        Returns
+        -------
+        int
+            The average backward payload length.
+        """
         return self.backward_packet_header_length_stats.mean()
 
     @property
     def std_backward_packet_payload_length(self):
+        """
+        Returns the standard deviation of payload length of backward packets.
+
+        Returns
+        -------
+        int
+            The standard deviation of backward payload length.
+        """
         return self.backward_packet_header_length_stats.std()
 
     @property
     def packet_count(self):
+        """
+        Returns the number of packets in the whole flow.
+
+        Returns
+        -------
+        int
+            The full packet counts.
+        """
         return len(self._forward) + len(self._backward)
 
     @property
     def forward_packet_count(self):
+        """
+        Returns the number of packets in the forward flow.
+
+        Returns
+        -------
+        int
+            The forward packet counts.
+        """
         return len(self._forward)
 
     @property
     def backward_packet_count(self):
+        """
+        Returns the number of packets in the backward flow.
+
+        Returns
+        -------
+        int
+            The backward packet counts.
+        """
         return len(self._backward)
 
     @property
     def packet_rate(self):
+        """
+        Returns the number of packets per second in the whole flow.
+
+        Returns
+        -------
+        float
+            The number of packets per second.
+        """
         if self.flow_duration == 0:
             return 1
-        return (len(self._forward) + len(self._backward)) / self.flow_duration
+        return (len(self._forward) + len(self._backward)) / (self.flow_duration / 1000000)
 
     @property
     def forward_packet_rate(self):
+        """
+        Returns the number of packets per second in the forward flow.
+
+        Returns
+        -------
+        float
+            The number of packets per second.
+        """
         if self.flow_duration == 0:
             return 1
-        return len(self._forward) / self.flow_duration
+        return len(self._forward) / (self.flow_duration / 1000000)
 
     @property
     def backward_packet_rate(self):
+        """
+        Returns the number of packets per second in the backward flow.
+
+        Returns
+        -------
+        float
+            The number of packets per second.
+        """
         if self.flow_duration == 0:
             return 1
-        return len(self._backward) / self.flow_duration
+        return len(self._backward) / (self.flow_duration / 1000000)
 
     @property
     def bytes_rate(self):
+        """
+        Returns the number of bytes per second in the whole flow.
+
+        Returns
+        -------
+        float
+            The number of bytes per second.
+        """
         if self.flow_duration == 0:
             return self.total_packet_length
-        return self.total_packet_length / self.flow_duration
+        return self.total_packet_length / (self.flow_duration / 1000000)
 
     @property
     def forward_bytes_rate(self):
+        """
+        Returns the number of bytes per second in the forward flow.
+
+        Returns
+        -------
+        float
+            The number of bytes per second.
+        """
         if self.flow_duration == 0:
             return self.total_forward_packet_length
-        return self.total_forward_packet_length / self.flow_duration
+        return self.total_forward_packet_length / (self.flow_duration / 1000000)
 
     @property
     def backward_bytes_rate(self):
+        """
+        Returns the number of bytes per second in the backward flow.
+
+        Returns
+        -------
+        float
+            The number of bytes per second.
+        """
         if self.flow_duration == 0:
             return self.total_forward_packet_length
-        return self.total_backward_packet_length / self.flow_duration
+        return self.total_backward_packet_length / (self.flow_duration / 1000000)
 
     @property
     def tcp_flags(self):
+        """
+        Returns the tcp flags count. (Only for TCP packets)
+
+        Returns
+        -------
+        syn_count : int
+            The number of SYN flags.
+        ack_count : int
+            The number of ACK flags.
+        rst_count : int
+            The number of RST flags.
+        urg_count : int
+            The number of URG flags.
+        psh_count : int
+            The number of PSH flags.
+        fin_count : int
+            The number of FIN flags.
+        """
         syn_count = 0
         ack_count = 0
         rst_count = 0
@@ -412,52 +802,156 @@ class Flow(object):
 
     @property
     def init_window_size(self):
+        """
+        Returns the initial window size of the first packet in the flow. (Only for TCP)
+
+        Returns
+        -------
+        int
+            The first window size.
+        """
         return self._forward[0].window_size
 
     @property
     def min_packet_interval(self):
+        """
+        Returns the minimum interval of packet arriving in both side.
+
+        Returns
+        -------
+        int
+            The minimum packet interval.
+        """
         return self.packet_interval_stats.min()
 
     @property
     def max_packet_interval(self):
+        """
+        Returns the maximum interval of packet arriving in both side.
+
+        Returns
+        -------
+        int
+            The maximum packet interval.
+        """
         return self.packet_interval_stats.max()
 
     @property
     def mean_packet_interval(self):
+        """
+        Returns the average interval of packet arriving in both side.
+
+        Returns
+        -------
+        int
+            The average packet interval.
+        """
         return self.packet_interval_stats.mean()
 
     @property
     def std_packet_interval(self):
+        """
+        Returns the standard deviation of interval of packet arriving in both side.
+
+        Returns
+        -------
+        int
+            The standard deviation of packet interval.
+        """
         return self.packet_interval_stats.std()
 
     @property
     def min_forward_packet_interval(self):
+        """
+        Returns the minimum interval of packet arriving in forward.
+
+        Returns
+        -------
+        int
+            The minimum forward  packet interval.
+        """
         return self.forward_packet_interval_stats.min()
 
     @property
     def max_forward_packet_interval(self):
+        """
+        Returns the maximum interval of packet arriving in forward.
+
+        Returns
+        -------
+        int
+            The maximum forward packet interval.
+        """
         return self.forward_packet_interval_stats.max()
 
     @property
     def mean_forward_packet_interval(self):
+        """
+        Returns the average interval of packet arriving in forward.
+
+        Returns
+        -------
+        int
+            The average forward  packet interval.
+        """
         return self.forward_packet_interval_stats.mean()
 
     @property
     def std_forward_packet_interval(self):
+        """
+        Returns the standard deviation of interval of packet arriving in forward.
+
+        Returns
+        -------
+        int
+            The standard deviation of forward packet interval.
+        """
         return self.forward_packet_interval_stats.std()
 
     @property
     def min_backward_packet_interval(self):
+        """
+        Returns the minimum interval of packet arriving in backward.
+
+        Returns
+        -------
+        int
+            The minimum backward  packet interval.
+        """
         return self.backward_packet_interval_stats.min()
 
     @property
     def max_backward_packet_interval(self):
+        """
+        Returns the maximum interval of packet arriving in backward.
+
+        Returns
+        -------
+        int
+            The maximum backward packet interval.
+        """
         return self.backward_packet_interval_stats.max()
 
     @property
     def mean_backward_packet_interval(self):
+        """
+        Returns the average interval of packet arriving in backward.
+
+        Returns
+        -------
+        int
+            The average backward packet interval.
+        """
         return self.backward_packet_interval_stats.mean()
 
     @property
     def std_backward_packet_interval(self):
+        """
+        Returns the standard deviation of interval of packet arriving in backward.
+
+        Returns
+        -------
+        int
+            The standard deviation of backward packet interval.
+        """
         return self.backward_packet_interval_stats.std()

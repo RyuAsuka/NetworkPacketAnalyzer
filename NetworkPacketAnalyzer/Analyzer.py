@@ -1,3 +1,16 @@
+"""
+The main programme.
+
+Usage
+-----
+    Analyzer `input_file` `output_file`
+
+Examples
+--------
+    Analyzer "data/captured.pcap" "data/captured.csv"
+"""
+
+
 from scapy.all import *
 from tqdm import tqdm
 from NetworkPacketAnalyzer.analyzer.FlowGenerator import FlowGenerator
@@ -24,7 +37,7 @@ if __name__ == '__main__':
     for packet_id, single_packet in tqdm(enumerate(all_packets), total=total_num_packets):
         timestamp = int(single_packet.time * 1000000)  # microseconds
         if 'IP' in single_packet:
-            ip_packet = single_packet['IP']  # only analyze IPv4 packets. IPv6 packets will be discarded.
+            ip_packet = single_packet['IP']  # Only analyze IPv4 packets. IPv6 packets will be discarded.
             basic_packet = BasicPacket(packet_id, timestamp, ip_packet)
             flow_generator.add_packet(basic_packet)
             n_valid += 1

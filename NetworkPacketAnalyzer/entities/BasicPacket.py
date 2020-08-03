@@ -1,18 +1,55 @@
-from scapy.layers.inet import IP
+"""
+This module defines the basic packet class.
+
+The packet class is extracted from the IP object of `scapy.layers.inet.IP`.
+"""
 
 
 class BasicPacket(object):
     """
-    定义基础数据包类。
+    The basic packet class.
 
     Parameters
     ----------
-    packet_id: int
-        数据包的全局 id
-    timestamp: int
-        数据包的到达时间（单位为微秒）
-    ip_packet: IP
-        数据包的网络层以上所有字段，含负载
+    packet_id : int
+        The global ID of the packet.
+    timestamp : int
+        The arrival time of the packet. (in microsecond)
+    ip_packet : scapy.layers.inet.IP
+        The packet extracted from `scapy`.
+
+    Attributes
+    ----------
+    packet_id : int
+        The global ID of the packet.
+    timestamp : int
+        The arrival time of the packet. (in microsecond)
+    src_ip : str
+        The source IP of the packet.
+    dst_ip : str
+        The destination IP of the packet.
+    protocol : int
+        The procotol number of the packet. For TCP is 6, for UDP is 17, for others is 0.
+    hasACK : bool
+        True if the packet has flag "ACK".
+    hasFIN : bool
+        True if the packet has flag "FIN".
+    hasRST : bool
+        True if the packet has flag "RST".
+    hasPSH : bool
+        True if the packet has flag "PSH".
+    hasSYN : bool
+        True if the packet has flag "SYN".
+    hasURG : bool
+        True if the packet has flag "URG".
+    window_size : int
+        The initial window size in the packet. (Only for TCP)
+    header_size : int
+        The header size of the packet, including IP header and transportation layer header.
+    payload_size : int
+        The payload size of the packet.
+    total_size : int
+        The length of the whole packet. (Excluding the MAC layer header)
     """
     def __init__(self, packet_id, timestamp, ip_packet):
         self.packet_id = packet_id
@@ -65,22 +102,22 @@ class BasicPacket(object):
 
     def forward_flow_id(self):
         """
-        生成该流对应的前向流 ID。
+        Generate the forward flow ID of this packet.
 
         Returns
         -------
-        str:
-            该流对应的前向流 ID。
+        str
+            The forward flow ID.
         """
         return '-'.join([self.src_ip, str(self.src_port), self.dst_ip, str(self.dst_port), str(self.protocol)])
 
     def backward_flow_id(self):
         """
-        生成该流对应的后向流 ID。
+        Generate the backward flow ID of this packet.
 
         Returns
         -------
-        str:
-            该流对应的后向流 ID。
+        str
+            The backward flow ID.
         """
         return '-'.join([self.dst_ip, str(self.dst_port), self.src_ip, str(self.src_port), str(self.protocol)])

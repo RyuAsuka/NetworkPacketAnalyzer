@@ -1,3 +1,24 @@
+"""
+Generate a flow supervisor.
+
+The flow supervisor maintains two collection spaces, one represents the currently processing flows `current_flows`,
+the other is the flows finished processing `finished_flows`.
+
+When a flow is marked as "finished", it will be moved from `current_flows` to `finished_flows`.
+
+Notes
+-----
+    The condition of finishing a flow:
+
+    1. There is FIN packets in the flow. When the handshake of closing flow ends,
+        the flow is considered as "finished". (Only for TCP)
+    2. There is a RST packet in the flow. When the processor meets the RST packet,
+        the flow is considered as "finished" immediately. (Only for TCP)
+    3. Next packet of the same flow ID comes, but the arrival time exceeds the flow timeout,
+        then the flow is considered as "finished", and the new packet is considered as a new flow. (For TCP and UDP)
+"""
+
+
 from tqdm import tqdm
 from NetworkPacketAnalyzer.entities.Flow import Flow
 from NetworkPacketAnalyzer.entities.BasicPacket import BasicPacket
@@ -7,33 +28,24 @@ from NetworkPacketAnalyzer.utils.FlowStatus import FlowStatus
 
 class FlowGenerator(object):
     """
-    维护两个存储空间，分别表示当前正在处理的流 `current_flows` 和
-    已经处理完毕的流 `finished_flows`。
+    The flow generator class.
 
-    当一个流符合结束条件时，`current_flows` 中的该流会被加入到 `finished_flows` 中。
-
-    Notes
-    -----
-    流的结束条件：
-
-        1. 流中含有 FIN 报文。当四次握手结束后，该流视为结束。（仅限TCP流）
-        2. 流中含有 RST 报文。一旦出现 RST 报文，则该流视为结束。（仅限TCP流）
-        3. 下一个符合流 ID 的报文到达时，已经超过了超时时间。（适用于 TCP 流和 UDP 流）
+    It maintains two collection spaces, one represents the currently processing flows `current_flows`,
+    the other is the flows finished processing `finished_flows`.
 
     Attributes
     ----------
-    current_flows: dict of {str: Flow}
-        当前正在处理的流。
-    finished_flows: list of Flow
-        被视为结束的流。
-    flow_timeout: int
-        流超时时间。
+    current_flows : dict of {str: Flow}
+        The flows which are currently processing.
+    finished_flows : list of Flow
+        The flows which are considered as finished.
+    flow_timeout : int
+        The timeout of a flow.
 
     Parameters
     ----------
     flow_timeout: int
-        流超时时间。
-
+        The timeout of a flow.
     """
     def __init__(self, flow_timeout):
         self.current_flows = {}
@@ -43,12 +55,12 @@ class FlowGenerator(object):
 
     def add_packet(self, packet):
         """
-        向流生成器中添加数据包。
+        Add the packet to current flow.
 
         Parameters
         ----------
         packet: BasicPacket
-            经过处理的 BasicPacket 数据包对象。
+            The processed `BasicPacket` object.
         """
         if not packet:
             return
@@ -64,34 +76,25 @@ class FlowGenerator(object):
             else:
                 flow = self.current_flows[backward_packet_flow_id]
 
-            # 流活跃状态下：
-            # 1. 当收到一个包发现其超时后，结束当前流并生成一个新的流。
-            # 2. 收到前向 FIN 报文，进入 FIN_WAIT_1 状态。
-            # 3. 收到后向 FIN 报文，进入 CLOSE_WAIT 状态。
-            # 4. 收到普通报文，将其添加入所属的流中。
+            # Under the status of ACTIVE:
+            # 1. When received a packet and it is timeout, finish current flow and genenrate a new flow.
+            # 2. When received a forward FIN packet, turn to FIN_WAIT_1 status.
+            # 3. When received a backward FIN packet, turn to CLOSE_WAIT status.
+            # 4. When received a RST packet, finish current flow.
+            # 5. When received a normal packet, add the packet to current flow.
             if flow.flow_status == FlowStatus.ACTIVE:
-                # 流超时的情况
-                # 将当前流从 current_flows 中移动到 finished_flows
-                # 将该数据包组成一个新的流
                 if current_timestamp - flow.start_time > self.flow_timeout:
                     self._timeout_process(flow, packet)
-                # 接收到 FIN 报文的情况
-                # 若是前向 FIN（从客户端发起的 FIN），则进入 FIN_WAIT_1 状态
-                # 若是后向 FIN（从服务端发起的 FIN），则进入 CLOSE_WAIT 状态
                 elif packet.hasFIN:
                     flow.add_packet(packet)
                     if packet.forward_flow_id() == flow.flow_id:
                         flow.flow_status = FlowStatus.FIN_WAIT_1
                     else:
                         flow.flow_status = FlowStatus.CLOSE_WAIT
-                # 接收到 RST 的情况
-                # 将当前流移动到 finished_flows
-                # 并将该流从当前流中删除
                 elif packet.hasRST:
                     self.logger.debug(f'Received a RST packet: {flow.flow_id}')
                     flow.add_packet(packet)
                     self._move_flow_from_current_to_finished(flow)
-                # 其他情况：向该流中正常添加数据包。
                 else:
                     flow.add_packet(packet)
             elif flow.flow_status == FlowStatus.FIN_WAIT_1:
@@ -130,26 +133,26 @@ class FlowGenerator(object):
 
     def _move_flow_from_current_to_finished(self, flow):
         """
-        将流从当前流 current_flow 中移动到结束流 finished_flow.
+        Move the flow from `current_flows` to `finished_flows`.
 
         Parameters
         ----------
         flow: Flow
-            要移动的流。
+            The flow to be moved.
         """
         self.finished_flows.append(flow)
         self.current_flows.pop(flow.flow_id)
 
     def _timeout_process(self, flow, packet):
         """
-        对超时处理的封装。
+        The encapsulation of the process of timeout packets.
 
         Parameters
         ----------
         flow: Flow
-            当前正在处理的流。
+            Currently processing flow.
         packet: BasicPacket
-            对超时的流，当前到达的数据包要重新建一个新的流。
+            The timeout packet.
         """
         self.logger.debug(f'Flow Timeout: {flow.flow_id}')
         if flow.packet_count > 1:
@@ -159,13 +162,14 @@ class FlowGenerator(object):
 
     def dumpflows_to_csv(self, output_file):
         """
-        若 current_flows 还有未处理的流，则将他们加入 finished_flows。
-        然后将 finished_flows 中的所有流写入由 output_file 指定的 csv 文件中。
+        Dump the statistics of all flows in `finished_flow` and generate target CSV file.
+
+        If there are remaining flows in `current_flows`, move them to `finished_flows`.
 
         Parameters
         ----------
         output_file: str
-            指定输出文件的文件名。
+            The file name of output file.
         """
         header = [
             "Flow ID",
