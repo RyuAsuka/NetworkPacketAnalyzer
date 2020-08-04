@@ -9,6 +9,7 @@ When every packet belongs to this flow joined, the related statistics
 will be updated.
 """
 
+import time
 from NetworkPacketAnalyzer.entities.BasicPacket import BasicPacket
 from NetworkPacketAnalyzer.utils.logger import MyLogger
 from NetworkPacketAnalyzer.analyzer.FlowStatistics import FlowStatistics
@@ -39,9 +40,9 @@ class Flow(object):
         The destination Port of the flow.
     protocol: int
         The protocol number of the flow. (TCP=6, UDP=17, Others=0)
-    start_time: int
+    _start_time: int
         The start time of the flow. (in microseconds)
-    end_time: int
+    _end_time: int
         The end time of the flow. (in microseconds)
     flow_timeout: int
         The timeout of the flow. (in microsecons)
@@ -86,8 +87,8 @@ class Flow(object):
         self.logger = MyLogger('Flow')
         self._forward = []
         self._backward = []
-        self.start_time = 0
-        self.end_time = 0
+        self._start_time = 0
+        self._end_time = 0
         self.flow_timeout = flow_timeout
 
         # Statistics
@@ -146,8 +147,8 @@ class Flow(object):
             The flow ID of the first packet.
         """
         self._forward.append(packet)
-        self.start_time = packet.timestamp
-        self.end_time = packet.timestamp
+        self._start_time = packet.timestamp
+        self._end_time = packet.timestamp
 
         self.packet_length_stats.add_value(packet.total_size)
         self.packet_header_length_stats.add_value(packet.header_size)
@@ -184,13 +185,49 @@ class Flow(object):
         self.packet_length_stats.add_value(packet.total_size)
         self.packet_header_length_stats.add_value(packet.header_size)
         self.packet_payload_length_stats.add_value(packet.payload_size)
-        self.end_time = packet.timestamp
-        interval = self.end_time - self.start_time
+        self._end_time = packet.timestamp
+        interval = self._end_time - self._start_time
         self.packet_interval_stats.add_value(interval)
         if packet.forward_flow_id() == self.flow_id:
             self.forward_packet_interval_stats.add_value(interval)
         elif packet.backward_flow_id() == self.flow_id:
             self.backward_packet_interval_stats.add_value(interval)
+
+    def _convert_time_format(self, time, format):
+        """
+        Convert time from microseconds to readable time format.
+
+        Parameters
+        ----------
+        time : int
+            The time int value (in microseconds).
+        format : str
+            The time format string.
+
+        Returns
+        -------
+        str
+            The converted time string.
+        """
+
+    @property
+    def start_time(self):
+        """
+        Returns the flow start time in GMT standard format.
+
+        The standard format is
+
+            YYYY-mm-dd HH:MM:SS.microseconds
+
+        Returns
+        -------
+        str
+            The formatted string of time.
+        """
+        microseconds = self._start_time % 1000000
+        time_sec = self._start_time / 1000000
+        time_string = time.strftime("YYYY-mm-dd HH:MM:SS", time.gmtime(time_sec))
+        return time_string + str(microseconds)
 
     @property
     def flow_duration(self):
