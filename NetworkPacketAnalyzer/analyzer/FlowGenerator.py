@@ -68,7 +68,7 @@ class FlowGenerator(object):
         backward_packet_flow_id = packet.backward_flow_id()
         current_timestamp = packet.timestamp
         if forward_packet_flow_id not in self.current_flows and backward_packet_flow_id not in self.current_flows:
-            # 说明是一个新的流的开始
+            # A new flow begins
             self.current_flows[forward_packet_flow_id] = Flow(packet, self.flow_timeout)
         else:
             if forward_packet_flow_id in self.current_flows:

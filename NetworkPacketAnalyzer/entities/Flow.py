@@ -15,6 +15,8 @@ from NetworkPacketAnalyzer.utils.logger import MyLogger
 from NetworkPacketAnalyzer.analyzer.FlowStatistics import FlowStatistics
 from NetworkPacketAnalyzer.utils.FlowStatus import FlowStatus
 
+TIME_FORMAT = "%Y-%m-%d %H:%M:%S"
+
 
 class Flow(object):
     """
@@ -83,6 +85,7 @@ class Flow(object):
     --------
     FlowStatus : The flow status enum.
     """
+
     def __init__(self, first_packet, flow_timeout):
         self.logger = MyLogger('Flow')
         self._forward = []
@@ -193,41 +196,60 @@ class Flow(object):
         elif packet.backward_flow_id() == self.flow_id:
             self.backward_packet_interval_stats.add_value(interval)
 
-    def _convert_time_format(self, time, format):
+    @staticmethod
+    def _get_formatted_time_string(microseconds, time_format):
         """
-        Convert time from microseconds to readable time format.
+        Generate the formatted time string.
+
+        The time string is formatted by built-in `time` module.
 
         Parameters
         ----------
-        time : int
-            The time int value (in microseconds).
-        format : str
-            The time format string.
+        microseconds : int
+            The microseconds of needed time.
+        time_format : str
+            The time string format.
 
         Returns
         -------
         str
             The converted time string.
+
+        See Also
+        --------
+        time : The `time` module.
         """
+        mic_sec = microseconds % 1000000
+        sec = microseconds / 1000000
+        time_str = time.strftime(time_format, time.gmtime(sec))
+        return time_str + str(mic_sec)
 
     @property
     def start_time(self):
         """
-        Returns the flow start time in GMT standard format.
+        Returns the formatted start time.
 
-        The standard format is
-
-            YYYY-mm-dd HH:MM:SS.microseconds
+        The formatted time could make the time readable.
+        The time format is passed through `time_format` string.
 
         Returns
         -------
         str
-            The formatted string of time.
+            The string format of start time.
         """
-        microseconds = self._start_time % 1000000
-        time_sec = self._start_time / 1000000
-        time_string = time.strftime("YYYY-mm-dd HH:MM:SS", time.gmtime(time_sec))
-        return time_string + str(microseconds)
+        return self._get_formatted_time_string(self._start_time, TIME_FORMAT)
+
+    @property
+    def end_time(self):
+        """
+        Returns the formatted end time.
+
+        Returns
+        -------
+        str
+            The string format of end time.
+        """
+        return self._get_formatted_time_string(self._end_time, TIME_FORMAT)
 
     @property
     def flow_duration(self):
@@ -239,7 +261,7 @@ class Flow(object):
         int
             The flow duration.
         """
-        return self.end_time - self.start_time
+        return self._end_time - self._start_time
 
     @property
     def total_packet_length(self):
@@ -781,10 +803,15 @@ class Flow(object):
             return self.total_forward_packet_length
         return self.total_backward_packet_length / (self.flow_duration / 1000000)
 
-    @property
-    def tcp_flags(self):
+    @staticmethod
+    def _stat_flags(packets_list):
         """
-        Returns the tcp flags count. (Only for TCP packets)
+        Statistic the flag count in all packets.
+
+        Parameters
+        ----------
+        packets_list : list of BasicPacket
+            The packet list.
 
         Returns
         -------
@@ -807,35 +834,49 @@ class Flow(object):
         urg_count = 0
         psh_count = 0
         fin_count = 0
-        for fp in self._forward:
-            fp: BasicPacket
-            if fp.hasURG:
+        for pkt in packets_list:
+            if pkt.hasURG:
                 urg_count += 1
-            if fp.hasSYN:
+            if pkt.hasSYN:
                 syn_count += 1
-            if fp.hasRST:
+            if pkt.hasRST:
                 rst_count += 1
-            if fp.hasACK:
+            if pkt.hasACK:
                 ack_count += 1
-            if fp.hasPSH:
+            if pkt.hasPSH:
                 psh_count += 1
-            if fp.hasFIN:
-                fin_count += 1
-        for bp in self._forward:
-            bp: BasicPacket
-            if bp.hasURG:
-                urg_count += 1
-            if bp.hasSYN:
-                syn_count += 1
-            if bp.hasRST:
-                rst_count += 1
-            if bp.hasACK:
-                ack_count += 1
-            if bp.hasPSH:
-                psh_count += 1
-            if bp.hasFIN:
+            if pkt.hasFIN:
                 fin_count += 1
         return syn_count, ack_count, rst_count, urg_count, psh_count, fin_count
+
+    @property
+    def tcp_flags(self):
+        """
+        Returns the tcp flags count. (Only for TCP packets)
+
+        Returns
+        -------
+        syn_count : int
+            The number of SYN flags.
+        ack_count : int
+            The number of ACK flags.
+        rst_count : int
+            The number of RST flags.
+        urg_count : int
+            The number of URG flags.
+        psh_count : int
+            The number of PSH flags.
+        fin_count : int
+            The number of FIN flags.
+        """
+        forward_flags = self._stat_flags(self._forward)
+        backward_flags = self._stat_flags(self._backward)
+        return forward_flags[0] + backward_flags[0], \
+            forward_flags[1] + backward_flags[1], \
+            forward_flags[2] + backward_flags[2], \
+            forward_flags[3] + backward_flags[3], \
+            forward_flags[4] + backward_flags[4], \
+            forward_flags[5] + backward_flags[5]
 
     @property
     def init_window_size(self):
