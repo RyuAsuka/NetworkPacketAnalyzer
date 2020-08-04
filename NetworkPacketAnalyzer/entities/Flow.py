@@ -10,10 +10,10 @@ will be updated.
 """
 
 import time
-from NetworkPacketAnalyzer.entities.BasicPacket import BasicPacket
-from NetworkPacketAnalyzer.utils.logger import MyLogger
-from NetworkPacketAnalyzer.analyzer.FlowStatistics import FlowStatistics
-from NetworkPacketAnalyzer.utils.FlowStatus import FlowStatus
+from entities.BasicPacket import BasicPacket
+from utils.logger import MyLogger
+from analyzer.FlowStatistics import FlowStatistics
+from utils.FlowStatus import FlowStatus
 
 TIME_FORMAT = "%Y-%m-%d %H:%M:%S"
 
@@ -42,9 +42,9 @@ class Flow(object):
         The destination Port of the flow.
     protocol: int
         The protocol number of the flow. (TCP=6, UDP=17, Others=0)
-    _start_time: int
+    start_timestamp: int
         The start time of the flow. (in microseconds)
-    _end_time: int
+    end_timestamp: int
         The end time of the flow. (in microseconds)
     flow_timeout: int
         The timeout of the flow. (in microsecons)
@@ -90,8 +90,8 @@ class Flow(object):
         self.logger = MyLogger('Flow')
         self._forward = []
         self._backward = []
-        self._start_time = 0
-        self._end_time = 0
+        self.start_timestamp = 0
+        self.end_timestamp = 0
         self.flow_timeout = flow_timeout
 
         # Statistics
@@ -150,8 +150,8 @@ class Flow(object):
             The flow ID of the first packet.
         """
         self._forward.append(packet)
-        self._start_time = packet.timestamp
-        self._end_time = packet.timestamp
+        self.start_timestamp = packet.timestamp
+        self.end_timestamp = packet.timestamp
 
         self.packet_length_stats.add_value(packet.total_size)
         self.packet_header_length_stats.add_value(packet.header_size)
@@ -188,8 +188,8 @@ class Flow(object):
         self.packet_length_stats.add_value(packet.total_size)
         self.packet_header_length_stats.add_value(packet.header_size)
         self.packet_payload_length_stats.add_value(packet.payload_size)
-        self._end_time = packet.timestamp
-        interval = self._end_time - self._start_time
+        self.end_timestamp = packet.timestamp
+        interval = self.end_timestamp - self.start_timestamp
         self.packet_interval_stats.add_value(interval)
         if packet.forward_flow_id() == self.flow_id:
             self.forward_packet_interval_stats.add_value(interval)
@@ -237,7 +237,7 @@ class Flow(object):
         str
             The string format of start time.
         """
-        return self._get_formatted_time_string(self._start_time, TIME_FORMAT)
+        return self._get_formatted_time_string(self.start_timestamp, TIME_FORMAT)
 
     @property
     def end_time(self):
@@ -249,7 +249,7 @@ class Flow(object):
         str
             The string format of end time.
         """
-        return self._get_formatted_time_string(self._end_time, TIME_FORMAT)
+        return self._get_formatted_time_string(self.end_timestamp, TIME_FORMAT)
 
     @property
     def flow_duration(self):
@@ -261,7 +261,7 @@ class Flow(object):
         int
             The flow duration.
         """
-        return self._end_time - self._start_time
+        return self.end_timestamp - self.start_timestamp
 
     @property
     def total_packet_length(self):

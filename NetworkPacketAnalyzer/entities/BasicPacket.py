@@ -5,6 +5,9 @@ The packet class is extracted from the IP object of `scapy.layers.inet.IP`.
 """
 
 
+from utils.logger import MyLogger
+
+
 class BasicPacket(object):
     """
     The basic packet class.
@@ -52,6 +55,7 @@ class BasicPacket(object):
         The length of the whole packet. (Excluding the MAC layer header)
     """
     def __init__(self, packet_id, timestamp, ip_packet):
+        self.logger = MyLogger('BasicPacket')
         self.packet_id = packet_id
         self.timestamp = timestamp
 
@@ -89,14 +93,18 @@ class BasicPacket(object):
             if 'R' in tcp_layer_info.flags:
                 self.hasRST = True
             self.window_size = tcp_layer_info.window
+            self.header_size = len(tcp_layer_info) - len(tcp_layer_info.payload)
+            self.payload_size = len(tcp_layer_info.payload)
         elif 'UDP' in ip_packet:
             udp_layer_info = ip_packet['UDP']
             self.src_port = udp_layer_info.sport
             self.dst_port = udp_layer_info.dport
-
-        if 'Raw' in ip_packet:
-            self.header_size = len(ip_packet) - len(ip_packet['Raw'])
-            self.payload_size = len(ip_packet['Raw'])
+            self.header_size = len(udp_layer_info) - len(udp_layer_info.payload)
+            self.payload_size = len(udp_layer_info.payload)
+        else:
+            payload = ip_packet.payload
+            self.header_size = len(ip_packet) - len(payload)
+            self.payload_size = len(payload)
 
         self.total_size = len(ip_packet)
 

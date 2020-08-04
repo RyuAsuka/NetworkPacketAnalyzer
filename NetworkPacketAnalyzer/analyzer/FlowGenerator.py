@@ -20,10 +20,10 @@ Notes
 
 
 from tqdm import tqdm
-from NetworkPacketAnalyzer.entities.Flow import Flow
-from NetworkPacketAnalyzer.entities.BasicPacket import BasicPacket
-from NetworkPacketAnalyzer.utils.logger import MyLogger
-from NetworkPacketAnalyzer.utils.FlowStatus import FlowStatus
+from entities.Flow import Flow
+from entities.BasicPacket import BasicPacket
+from utils.logger import MyLogger
+from utils.FlowStatus import FlowStatus
 
 
 class FlowGenerator(object):
@@ -83,7 +83,7 @@ class FlowGenerator(object):
             # 4. When received a RST packet, finish current flow.
             # 5. When received a normal packet, add the packet to current flow.
             if flow.flow_status == FlowStatus.ACTIVE:
-                if current_timestamp - flow._start_time > self.flow_timeout:
+                if current_timestamp - flow.start_timestamp > self.flow_timeout:
                     self._timeout_process(flow, packet)
                 elif packet.hasFIN:
                     flow.add_packet(packet)
@@ -107,28 +107,28 @@ class FlowGenerator(object):
                 flow.add_packet(packet)
                 if packet.hasFIN:
                     flow.flow_status = FlowStatus.TIME_WAIT
-                elif current_timestamp - flow._start_time > self.flow_timeout:
+                elif current_timestamp - flow.start_timestamp > self.flow_timeout:
                     self._timeout_process(flow, packet)
             elif flow.flow_status == FlowStatus.CLOSING:
                 flow.add_packet(packet)
                 if packet.hasACK:
                     self._move_flow_from_current_to_finished(flow)
-                elif current_timestamp - flow._start_time > self.flow_timeout:
+                elif current_timestamp - flow.start_timestamp > self.flow_timeout:
                     self._timeout_process(flow, packet)
             elif flow.flow_status == FlowStatus.CLOSE_WAIT:
                 flow.add_packet(packet)
                 if packet.backward_flow_id() == flow.flow_id and packet.hasFIN:
                     flow.flow_status = FlowStatus.LAST_ACK
-                elif current_timestamp - flow._start_time > self.flow_timeout:
+                elif current_timestamp - flow.start_timestamp > self.flow_timeout:
                     self._timeout_process(flow, packet)
             elif flow.flow_status == FlowStatus.LAST_ACK:
                 flow.add_packet(packet)
                 if packet.hasACK:
                     self._move_flow_from_current_to_finished(flow)
-                elif current_timestamp - flow._start_time > self.flow_timeout:
+                elif current_timestamp - flow.start_timestamp > self.flow_timeout:
                     self._timeout_process(flow, packet)
             elif flow.flow_status == FlowStatus.TIME_WAIT:
-                if current_timestamp - flow._start_time > self.flow_timeout:
+                if current_timestamp - flow.start_timestamp > self.flow_timeout:
                     self._timeout_process(flow, packet)
 
     def _move_flow_from_current_to_finished(self, flow):
@@ -141,7 +141,11 @@ class FlowGenerator(object):
             The flow to be moved.
         """
         self.finished_flows.append(flow)
-        self.current_flows.pop(flow.flow_id)
+        if flow.flow_id in self.current_flows.keys():
+            self.current_flows.pop(flow.flow_id)
+        else:
+            self.logger.warning("flow id %s is not in current_flows.keys()", flow.flow_id)
+            self.logger.warning("Current flow Status: %s", FlowStatus.code_to_str[flow.flow_status])
 
     def _timeout_process(self, flow, packet):
         """
@@ -157,7 +161,8 @@ class FlowGenerator(object):
         self.logger.debug(f'Flow Timeout: {flow.flow_id}')
         if flow.packet_count > 1:
             self.finished_flows.append(flow)
-        self.current_flows.pop(flow.flow_id)
+        if flow.flow_id in self.current_flows:
+            self.current_flows.pop(flow.flow_id)
         self.current_flows[flow.flow_id] = Flow(packet, self.flow_timeout)
 
     def dumpflows_to_csv(self, output_file):
@@ -261,6 +266,7 @@ class FlowGenerator(object):
             "Std Bwd Packet Interval",
         ]
         lines = [','.join(header) + '\n']
+        # FIXME: Currently the last packet in an incomplete flow will invoke a dead loop.
         while self.current_flows:
             flow_id = list(self.current_flows.keys())[0]
             self._move_flow_from_current_to_finished(self.current_flows[flow_id])
@@ -272,7 +278,7 @@ class FlowGenerator(object):
                 flow.dst_ip,
                 flow.dst_port,
                 flow.protocol,
-                flow._start_time,
+                flow.start_timestamp,
                 flow.end_time,
                 flow.flow_duration,
 

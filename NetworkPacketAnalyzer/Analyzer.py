@@ -13,9 +13,9 @@ Examples
 
 from scapy.all import *
 from tqdm import tqdm
-from NetworkPacketAnalyzer.analyzer.FlowGenerator import FlowGenerator
-from NetworkPacketAnalyzer.utils.logger import MyLogger
-from NetworkPacketAnalyzer.entities.BasicPacket import BasicPacket
+from analyzer.FlowGenerator import FlowGenerator
+from utils.logger import MyLogger
+from entities.BasicPacket import BasicPacket
 
 
 FLOW_TIMEOUT = 120000000  # 120 seconds
@@ -31,16 +31,23 @@ if __name__ == '__main__':
     flow_generator = FlowGenerator(flow_timeout=FLOW_TIMEOUT)
     n_valid = 0
     n_discard = 0
+    logger.info('Reading pcap file...')
     all_packets = rdpcap(input_file)
+    logger.info('Done!')
     total_num_packets = len(all_packets)
     logger.info("Start reading packets...")
     for packet_id, single_packet in tqdm(enumerate(all_packets), total=total_num_packets):
         timestamp = int(single_packet.time * 1000000)  # microseconds
         if 'IP' in single_packet:
-            ip_packet = single_packet['IP']  # Only analyze IPv4 packets. IPv6 packets will be discarded.
-            basic_packet = BasicPacket(packet_id, timestamp, ip_packet)
-            flow_generator.add_packet(basic_packet)
-            n_valid += 1
+            try:
+                ip_packet = single_packet['IP']  # Only analyze IPv4 packets. IPv6 packets will be discarded.
+                basic_packet = BasicPacket(packet_id, timestamp, ip_packet)
+                flow_generator.add_packet(basic_packet)
+                n_valid += 1
+            except TypeError:
+                logger.error('TypeError is invoked. Current packet ID = %d', packet_id)
+                # logger.error('type(ip_packet)=%s', type(single_packet['IP']))
+                logger.error('ip_packet=%s', repr(single_packet['IP']), exc_info=1)
         else:
             n_discard += 1
     logger.info(
