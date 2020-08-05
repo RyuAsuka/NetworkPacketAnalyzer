@@ -32,24 +32,37 @@ if __name__ == '__main__':
     n_valid = 0
     n_discard = 0
     logger.info('Reading pcap file...')
-    all_packets = rdpcap(input_file)
+    # all_packets = rdpcap(input_file)
+    all_packets = PcapReader(input_file)
     logger.info('Done!')
-    total_num_packets = len(all_packets)
-    logger.info("Start reading packets...")
-    for packet_id, single_packet in tqdm(enumerate(all_packets), total=total_num_packets):
-        timestamp = int(single_packet.time * 1000000)  # microseconds
-        if 'IP' in single_packet:
-            try:
-                ip_packet = single_packet['IP']  # Only analyze IPv4 packets. IPv6 packets will be discarded.
-                basic_packet = BasicPacket(packet_id, timestamp, ip_packet)
-                flow_generator.add_packet(basic_packet)
-                n_valid += 1
-            except TypeError:
-                logger.error('TypeError is invoked. Current packet ID = %d', packet_id)
-                # logger.error('type(ip_packet)=%s', type(single_packet['IP']))
-                logger.error('ip_packet=%s', repr(single_packet['IP']), exc_info=1)
-        else:
-            n_discard += 1
+    total_num_packets = 0
+    logger.info('Start reading packets...')
+    pbar = tqdm()
+    while True:
+        try:
+            if total_num_packets % 10000 == 0:
+                logger.info('Total number of packets: %d', total_num_packets)
+                pbar.update(10000)
+            pkt = all_packets.next()
+            total_num_packets += 1
+            timestamp = int(pkt.time * 1000000)
+            if 'IP' in pkt:
+                try:
+                    ip_packet = pkt['IP']
+                    basic_packet = BasicPacket(total_num_packets, timestamp, pkt)
+                    flow_generator.add_packet(basic_packet)
+                    n_valid += 1
+                except TypeError:
+                    logger.error('TypeError: Current packet ID = %d', total_num_packets)
+                    logger.error('packet: %s', repr(pkt['IP']), exc_info=1)
+                except Exception as e:
+                    logger.error('%s', e)
+            else:
+                n_discard += 1
+        except StopIteration:
+            logger.info('Done!')
+            break
+
     logger.info(
         f"End reading packets.\n"
         f"Total {total_num_packets} packets.\n"
