@@ -133,6 +133,24 @@ class Flow(object):
         else:
             return "", 0, "", 0, 0
 
+    def reverse_flow_id(self):
+        """
+        Reverse the flow id with 'DstIP-DstPort-SrcIP-SrcPort-Protocol'
+
+        If the flow ID of flow saved in `analyzer.FlowGenerator.current_flows` does not match the key of current flow,
+        use this function to reverse the flow ID.
+
+        Returns
+        -------
+        str
+            The reversed flow ID.
+        """
+        src_ip, src_port, dst_ip, dst_port, protocol = self._parse_flow_id()
+        src_ip, dst_ip = dst_ip, src_ip
+        src_port, dst_port = dst_port, src_port
+        self.flow_id = '-'.join([src_ip, str(src_port), dst_ip, str(dst_port), str(protocol)])
+        return self.flow_id
+
     def _add_first_packet(self, packet):
         """
         Add the first packet into a flow.
@@ -195,6 +213,9 @@ class Flow(object):
             self.forward_packet_interval_stats.add_value(interval)
         elif packet.backward_flow_id() == self.flow_id:
             self.backward_packet_interval_stats.add_value(interval)
+
+    def __str__(self):
+        return self.flow_id
 
     @staticmethod
     def _get_formatted_time_string(microseconds, time_format):

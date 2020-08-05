@@ -145,7 +145,8 @@ class FlowGenerator(object):
             self.current_flows.pop(flow.flow_id)
         else:
             self.logger.warning("flow id %s is not in current_flows.keys()", flow.flow_id)
-            self.logger.warning("Current flow Status: %s", FlowStatus.code_to_str[flow.flow_status])
+            self.logger.warning("Reverse the flow ID.")
+            self.current_flows.pop(flow.reverse_flow_id())
 
     def _timeout_process(self, flow, packet):
         """
@@ -185,6 +186,8 @@ class FlowGenerator(object):
             "Protocol",
             "Start Time",
             "End Time",
+            "Start Timestamp",
+            "End Timestamp",
             "Flow Duration",
 
             "Total Packet Length",
@@ -278,8 +281,10 @@ class FlowGenerator(object):
                 flow.dst_ip,
                 flow.dst_port,
                 flow.protocol,
-                flow.start_timestamp,
+                flow.start_time,
                 flow.end_time,
+                flow.start_timestamp,
+                flow.end_timestamp,
                 flow.flow_duration,
 
                 flow.total_packet_length,
@@ -364,8 +369,9 @@ class FlowGenerator(object):
             data_str = ','.join(data_line) + '\n'
             lines.append(data_str)
         try:
-            with open(output_file, 'w+') as of:
-                of.writelines(lines)
-                self.logger.info(f'Create output file {output_file} successfully.')
-        except Exception:
+            of = open(output_file, 'w+')
+            of.writelines(lines)
+            self.logger.info(f'Create output file {output_file} successfully.')
+            of.close()
+        except FileNotFoundError:
             self.logger.error(f'Create output file {output_file} failed!', exc_info=True)

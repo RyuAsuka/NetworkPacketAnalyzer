@@ -129,3 +129,28 @@ class BasicPacket(object):
             The backward flow ID.
         """
         return '-'.join([self.dst_ip, str(self.dst_port), self.src_ip, str(self.src_port), str(self.protocol)])
+
+    def __str__(self):
+        ip_packet_string = f'<IP src={self.src_ip}, dst={self.dst_ip}>'
+        if self.protocol == 6:
+            trans_packet_string = f'<TCP sport={self.src_port}, dport={self.dst_port}, flags='
+            if self.hasURG:
+                trans_packet_string += 'U'
+            if self.hasACK:
+                trans_packet_string += 'A'
+            if self.hasPSH:
+                trans_packet_string += 'P'
+            if self.hasRST:
+                trans_packet_string += 'R'
+            if self.hasSYN:
+                trans_packet_string += 'S'
+            if self.hasFIN:
+                trans_packet_string += 'F'
+            trans_packet_string += f', window={self.window_size}>'
+        elif self.protocol == 17:
+            trans_packet_string = f'<UDP sport={self.src_port}, dport={self.dst_port}>'
+        else:
+            trans_packet_string = ''
+
+        payload_string = f'<payload length={self.payload_size}>'
+        return ip_packet_string + '|' + trans_packet_string + '|' + payload_string
