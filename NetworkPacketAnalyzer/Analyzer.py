@@ -14,7 +14,8 @@ Examples
 import os
 import time
 import sys
-from scapy.utils import rdpcap
+from scapy.all import *
+from pcapfile.savefile import load_savefile
 from tqdm import tqdm
 from analyzer.FlowGenerator import FlowGenerator
 from utils.logger import MyLogger
@@ -39,6 +40,8 @@ if __name__ == '__main__':
     input_file = sys.argv[1]
     output_file = sys.argv[2]
 
+    file_size = os.path.getsize(input_file)
+
     # Set notifier
     if sys.platform == 'win32':
         notifier = NotifierWin32(APP_NAME)
@@ -48,29 +51,37 @@ if __name__ == '__main__':
         notifier = None
 
     flow_generator = FlowGenerator(flow_timeout=FLOW_TIMEOUT)
+    total_num_packets = 0
     n_valid = 0
     n_discard = 0
 
     logger.info('Reading pcap file...')
     start_time = time.time()
-    all_packets = rdpcap(input_file)
+    reader = PcapReader(input_file)
     end_time = time.time()
-    logger.info(f'Done! Time elapsed: {(end_time - start_time):.2f}')
-    total_num_packets = len(all_packets)
+    logger.info(f'Done! Time elapsed: {(end_time - start_time):.2f}s')
     logger.info('Start reading packets...')
-    for pkt_id, pkt in tqdm(enumerate(all_packets), total=total_num_packets, unit='packets'):
-        timestamp = pkt.time * 1000000
-        if 'IP' in pkt:
-            try:
-                ip_packet = pkt['IP']
-                basic_packet = BasicPacket(pkt_id, timestamp, ip_packet)
-                flow_generator.add_packet(basic_packet)
-                n_valid += 1
-            except TypeError:
-                logger.error('TypeError: Current packet ID = %d', total_num_packets)
-                logger.error('packet: %s', repr(pkt['IP']), exc_info=1)
-        else:
-            n_discard += 1
+    pbar = tqdm(total=file_size, unit='bytes')
+    while True:
+        try:
+            pkt = reader.next()
+            total_num_packets += 1
+            pkt_size = len(pkt)
+            pbar.update(pkt_size)
+            timestamp = pkt.time * 1000000
+            if 'IP' in pkt:
+                try:
+                    ip_packet = pkt['IP']
+                    basic_packet = BasicPacket(total_num_packets, timestamp, ip_packet)
+                    flow_generator.add_packet(basic_packet)
+                    n_valid += 1
+                except TypeError:
+                    logger.error('TypeError: Current packet ID = %d', total_num_packets)
+                    logger.error('packet: %s', repr(pkt['IP']), exc_info=1)
+            else:
+                n_discard += 1
+        except StopIteration:
+            break
 
     # pcap_file = open(input_file, 'rb')
     # all_packets = load_savefile(pcap_file, layers=2, verbose=True)
