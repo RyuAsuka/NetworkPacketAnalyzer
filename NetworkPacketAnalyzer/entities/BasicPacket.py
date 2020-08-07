@@ -6,6 +6,7 @@ The packet class is extracted from the IP object of `scapy.layers.inet.IP`.
 
 
 from utils.logger import MyLogger
+from scapy.layers.inet import IP
 
 
 class BasicPacket(object):
@@ -60,8 +61,8 @@ class BasicPacket(object):
         self.timestamp = timestamp
 
         # IP information
-        self.src_ip = ip_packet.src
-        self.dst_ip = ip_packet.dst
+        self.src_ip = str(ip_packet.src)
+        self.dst_ip = str(ip_packet.dst)
         self.protocol = ip_packet.proto
 
         self.src_port = 0
@@ -76,37 +77,36 @@ class BasicPacket(object):
         self.header_size = 0
         self.payload_size = 0
 
-        if 'TCP' in ip_packet:
-            tcp_layer_info = ip_packet['TCP']
-            self.src_port = tcp_layer_info.sport
-            self.dst_port = tcp_layer_info.dport
-            if 'S' in tcp_layer_info.flags:
-                self.hasSYN = True
-            if 'A' in tcp_layer_info.flags:
-                self.hasACK = True
-            if 'F' in tcp_layer_info.flags:
-                self.hasFIN = True
-            if 'P' in tcp_layer_info.flags:
-                self.hasPSH = True
-            if 'U' in tcp_layer_info.flags:
+        self.total_size = len(ip_packet)
+
+        if 'TCP' in ip_packet.payload:
+            tcp_segment = ip_packet.payload
+            self.src_port = tcp_segment.sport
+            self.dst_port = tcp_segment.dport
+            if 'U' in tcp_segment.flags:
                 self.hasURG = True
-            if 'R' in tcp_layer_info.flags:
+            if 'A' in tcp_segment.flags:
+                self.hasACK = True
+            if 'P' in tcp_segment.flags:
+                self.hasPSH = True
+            if 'R' in tcp_segment.flags:
                 self.hasRST = True
-            self.window_size = tcp_layer_info.window
-            self.header_size = len(tcp_layer_info) - len(tcp_layer_info.payload)
-            self.payload_size = len(tcp_layer_info.payload)
-        elif 'UDP' in ip_packet:
-            udp_layer_info = ip_packet['UDP']
-            self.src_port = udp_layer_info.sport
-            self.dst_port = udp_layer_info.dport
-            self.header_size = len(udp_layer_info) - len(udp_layer_info.payload)
-            self.payload_size = len(udp_layer_info.payload)
+            if 'S' in tcp_segment.flags:
+                self.hasSYN = True
+            if 'F' in tcp_segment.flags:
+                self.hasFIN = True
+            self.window_size = tcp_segment.window
+            self.payload_size = len(tcp_segment.payload)
+        elif 'UDP' in ip_packet.payload:
+            udp_user_datagram = ip_packet.payload
+            self.src_port = udp_user_datagram.sport
+            self.dst_port = udp_user_datagram.dport
+            self.payload_size = len(udp_user_datagram.payload)
         else:
             payload = ip_packet.payload
-            self.header_size = len(ip_packet) - len(payload)
             self.payload_size = len(payload)
 
-        self.total_size = len(ip_packet)
+        self.header_size = self.total_size - self.payload_size
 
     def forward_flow_id(self):
         """
