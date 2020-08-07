@@ -11,14 +11,18 @@ Examples
 """
 
 
+import os
 from scapy.all import *
 from tqdm import tqdm
 from analyzer.FlowGenerator import FlowGenerator
 from utils.logger import MyLogger
 from entities.BasicPacket import BasicPacket
+from utils.NotifierWin32 import NotifierWin32
+from utils.NotifierLinux import NotifierLinux
 
 
 FLOW_TIMEOUT = 120000000  # 120 seconds
+APP_NAME = 'NetworkPacketAnalyzer'
 
 
 if __name__ == '__main__':
@@ -28,6 +32,15 @@ if __name__ == '__main__':
         exit(1)
     input_file = sys.argv[1]
     output_file = sys.argv[2]
+
+    input_file_size = os.path.getsize(input_file)
+
+    if sys.platform == 'win32':
+        notifier = NotifierWin32(APP_NAME)
+    elif sys.platform == 'linux':
+        notifier = NotifierLinux(APP_NAME)
+    else:
+        notifier = None
     flow_generator = FlowGenerator(flow_timeout=FLOW_TIMEOUT)
     n_valid = 0
     n_discard = 0
@@ -37,15 +50,16 @@ if __name__ == '__main__':
     logger.info('Done!')
     total_num_packets = 0
     logger.info('Start reading packets...')
-    pbar = tqdm()
+    pbar = tqdm(total=input_file_size)
     while True:
         try:
             if total_num_packets % 10000 == 0:
-                logger.info('Total number of packets: %d', total_num_packets)
-                pbar.update(10000)
+                logger.info('%d packets are read.', total_num_packets)
             pkt = all_packets.next()
             total_num_packets += 1
             timestamp = int(pkt.time * 1000000)
+            pkt_size = len(pkt)
+            pbar.update(pkt_size)
             if 'IP' in pkt:
                 try:
                     ip_packet = pkt['IP']
@@ -61,6 +75,8 @@ if __name__ == '__main__':
                 n_discard += 1
         except StopIteration:
             logger.info('Done!')
+            if notifier:
+                notifier.send_notification(APP_NAME, "All packets processing complete!")
             break
 
     logger.info(
