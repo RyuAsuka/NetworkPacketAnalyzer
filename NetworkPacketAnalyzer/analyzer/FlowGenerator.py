@@ -269,7 +269,6 @@ class FlowGenerator(object):
             "Std Bwd Packet Interval",
         ]
         lines = [','.join(header) + '\n']
-        # FIXME: Currently the last packet in an incomplete flow will invoke a dead loop.
         while self.current_flows:
             flow_id = list(self.current_flows.keys())[0]
             self._move_flow_from_current_to_finished(self.current_flows[flow_id])

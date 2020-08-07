@@ -8,6 +8,9 @@ The packet class is extracted from the IP object of `scapy.layers.inet.IP`.
 from utils.logger import MyLogger
 from scapy.layers.inet import IP
 
+logger = MyLogger('BasicPacket')
+# Please don't put logger into the class
+
 
 class BasicPacket(object):
     """
@@ -56,7 +59,6 @@ class BasicPacket(object):
         The length of the whole packet. (Excluding the MAC layer header)
     """
     def __init__(self, packet_id, timestamp, ip_packet):
-        self.logger = MyLogger('BasicPacket')
         self.packet_id = packet_id
         self.timestamp = timestamp
 

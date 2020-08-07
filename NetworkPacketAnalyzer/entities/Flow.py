@@ -16,6 +16,8 @@ from analyzer.FlowStatistics import FlowStatistics
 from utils.FlowStatus import FlowStatus
 
 TIME_FORMAT = "%Y-%m-%d %H:%M:%S"
+logger = MyLogger('Flow')
+# Please don't put logger into the class
 
 
 class Flow(object):
@@ -87,7 +89,6 @@ class Flow(object):
     """
 
     def __init__(self, first_packet, flow_timeout):
-        self.logger = MyLogger('Flow')
         self._forward = []
         self._backward = []
         self.start_timestamp = 0
