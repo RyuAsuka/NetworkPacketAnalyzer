@@ -11,9 +11,6 @@ Examples
 """
 
 
-import os
-import time
-import sys
 from scapy.all import *
 from pcapfile.savefile import load_savefile
 from tqdm import tqdm
@@ -82,30 +79,6 @@ if __name__ == '__main__':
                 n_discard += 1
         except StopIteration:
             break
-
-    # pcap_file = open(input_file, 'rb')
-    # all_packets = load_savefile(pcap_file, layers=2, verbose=True)
-    # total_num_packets = len(all_packets.packets)
-    # logger.info('Done!')
-    #
-    # logger.info('Start reading packets...')
-    # for pkt_id, pkt in tqdm(enumerate(all_packets.packets), total=total_num_packets, unit='packets'):
-    #     assert isinstance(pkt, pcap_packet)
-    #     timestamp = pkt.timestamp * 1000000 + pkt.timestamp_us
-    #     if pkt.packet.type == 0x800:
-    #         try:
-    #             ip_packet = pkt.packet.payload
-    #             assert isinstance(ip_packet, IP)
-    #             basic_packet = BasicPacket(pkt_id, timestamp, ip_packet)
-    #             flow_generator.add_packet(basic_packet)
-    #             n_valid += 1
-    #         except TypeError:
-    #             logger.error('TypeError: Current packet ID = %d', total_num_packets)
-    #             logger.error('packet: %s', repr(pkt['IP']), exc_info=1)
-    #         except Exception as e:
-    #             logger.error('%s', e)
-    #     else:
-    #         n_discard += 1
     notifier.send_notification(APP_NAME, "Packet analyzing complete!")
 
     logger.info(

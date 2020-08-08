@@ -12,6 +12,30 @@ NetworkPacketAnalyzer.utils.FlowStatus module
    :undoc-members:
    :show-inheritance:
 
+NetworkPacketAnalyzer.utils.INotification module
+------------------------------------------------
+
+.. automodule:: NetworkPacketAnalyzer.utils.INotification
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+NetworkPacketAnalyzer.utils.NotifierLinux module
+------------------------------------------------
+
+.. automodule:: NetworkPacketAnalyzer.utils.NotifierLinux
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+NetworkPacketAnalyzer.utils.NotifierWin32 module
+------------------------------------------------
+
+.. automodule:: NetworkPacketAnalyzer.utils.NotifierWin32
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 NetworkPacketAnalyzer.utils.logger module
 -----------------------------------------
 
