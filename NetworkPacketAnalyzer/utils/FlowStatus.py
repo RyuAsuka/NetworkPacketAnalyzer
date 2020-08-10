@@ -1,9 +1,11 @@
 """
 This module defines a simple enum class `FlowStatus`.
 """
+from enum import Enum, unique
 
 
-class FlowStatus(object):
+@unique
+class FlowStatus(Enum):
     """
     The FlowStatus enum.
     """

@@ -11,11 +11,7 @@ Examples
 """
 
 
-import os
-import time
-import sys
 from scapy.all import *
-from pcapfile.savefile import load_savefile
 from tqdm import tqdm
 from analyzer.FlowGenerator import FlowGenerator
 from utils.logger import MyLogger

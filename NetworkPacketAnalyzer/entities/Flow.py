@@ -26,8 +26,6 @@ class Flow(object):
 
     Attributes
     ----------
-    logger: MyLogger
-        The logger to log the processing.
     _forward: list of BasicPacket
         A list to save forward packets.
     _backward: list of BasicPacket
