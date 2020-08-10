@@ -13,6 +13,7 @@ Examples
 
 from scapy.all import *
 from tqdm import tqdm
+from pcapfile.savefile import load_savefile
 from analyzer.FlowGenerator import FlowGenerator
 from utils.logger import MyLogger
 from entities.BasicPacket import BasicPacket
