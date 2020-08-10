@@ -36,8 +36,6 @@ if __name__ == '__main__':
     input_file = sys.argv[1]
     output_file = sys.argv[2]
 
-    file_size = os.path.getsize(input_file)
-
     # Set notifier
     if sys.platform == 'win32':
         notifier = NotifierWin32(APP_NAME)
@@ -47,28 +45,30 @@ if __name__ == '__main__':
         notifier = None
 
     flow_generator = FlowGenerator(flow_timeout=FLOW_TIMEOUT)
-    total_num_packets = 0
     n_valid = 0
     n_discard = 0
 
     logger.info('Reading pcap file...')
     start_time = time.time()
+    reader = load_savefile(open(input_file, 'rb'))
+    total_num_packets = len(reader.packets)
     reader = PcapReader(input_file)
     end_time = time.time()
     logger.info(f'Done! Time elapsed: {(end_time - start_time):.2f}s')
     logger.info('Start reading packets...')
-    pbar = tqdm(total=file_size, unit='bytes')
+    pbar = tqdm(total=total_num_packets, unit='bytes')
+    processed_packets = 0
     while True:
         try:
             pkt = reader.next()
-            total_num_packets += 1
+            processed_packets += 1
             pkt_size = len(pkt)
-            pbar.update(pkt_size)
+            pbar.update(1)
             timestamp = pkt.time * 1000000
             if 'IP' in pkt:
                 try:
                     ip_packet = pkt['IP']
-                    basic_packet = BasicPacket(total_num_packets, timestamp, ip_packet)
+                    basic_packet = BasicPacket(processed_packets, timestamp, ip_packet)
                     flow_generator.add_packet(basic_packet)
                     n_valid += 1
                 except TypeError:
@@ -78,30 +78,6 @@ if __name__ == '__main__':
                 n_discard += 1
         except StopIteration:
             break
-
-    # pcap_file = open(input_file, 'rb')
-    # all_packets = load_savefile(pcap_file, layers=2, verbose=True)
-    # total_num_packets = len(all_packets.packets)
-    # logger.info('Done!')
-    #
-    # logger.info('Start reading packets...')
-    # for pkt_id, pkt in tqdm(enumerate(all_packets.packets), total=total_num_packets, unit='packets'):
-    #     assert isinstance(pkt, pcap_packet)
-    #     timestamp = pkt.timestamp * 1000000 + pkt.timestamp_us
-    #     if pkt.packet.type == 0x800:
-    #         try:
-    #             ip_packet = pkt.packet.payload
-    #             assert isinstance(ip_packet, IP)
-    #             basic_packet = BasicPacket(pkt_id, timestamp, ip_packet)
-    #             flow_generator.add_packet(basic_packet)
-    #             n_valid += 1
-    #         except TypeError:
-    #             logger.error('TypeError: Current packet ID = %d', total_num_packets)
-    #             logger.error('packet: %s', repr(pkt['IP']), exc_info=1)
-    #         except Exception as e:
-    #             logger.error('%s', e)
-    #     else:
-    #         n_discard += 1
     notifier.send_notification(APP_NAME, "Packet analyzing complete!")
 
     logger.info(
